@@ -15,6 +15,40 @@ By the end of Day 9, you will:
   - Essential for system administration, automation, backups, and collaboration.
   - Secure and efficient file transfer is a core DevOps/SRE skill.
 
+```mermaid
+flowchart TD
+    A[File Transfer Methods] --> B[Secure Methods]
+    A --> C[Network Filesystems]
+    A --> D[Legacy Methods]
+    
+    B --> B1[SCP<br/>SSH-based Copy]
+    B --> B2[SFTP<br/>SSH File Transfer]
+    B --> B3[rsync<br/>Synchronization]
+    B --> B4[SSH<br/>Remote Shell]
+    
+    C --> C1[NFS<br/>Network File System]
+    C --> C2[Samba/CIFS<br/>Windows Sharing]
+    C --> C3[SSHFS<br/>SSH Filesystem]
+    
+    D --> D1[FTP<br/>File Transfer Protocol]
+    D --> D2[TFTP<br/>Trivial FTP]
+    D --> D3[RCP<br/>Remote Copy]
+    
+    E[Transfer Features] --> E1[Encryption]
+    E --> E2[Authentication]
+    E --> E3[Compression]
+    E --> E4[Resume Support]
+    E --> E5[Incremental Sync]
+    
+    B1 --> F1[Simple Copy]
+    B2 --> F2[Interactive Session]
+    B3 --> F3[Delta Transfers]
+    
+    style B fill:#9f6
+    style D fill:#f66
+    style A fill:#69f
+```
+
 - **SSH (Secure Shell):**
   - Secure remote login and command execution.
   - `ssh user@host` — Connect to remote host

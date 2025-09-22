@@ -32,20 +32,29 @@ By the end of this day, you will:
 - **Monitor Continuously**: Performance degrades over time
 
 ### Performance Tuning Methodology
-```
-1. Baseline Measurement
-   ↓
-2. Identify Bottlenecks
-   ↓
-3. Hypothesize Solutions
-   ↓
-4. Implement Single Change
-   ↓
-5. Measure Impact
-   ↓
-6. Document Results
-   ↓
-7. Repeat or Rollback
+```mermaid
+flowchart TD
+    A[Performance Issue] --> B[Baseline Measurement]
+    B --> C[Identify Bottlenecks]
+    C --> D[Hypothesize Solutions]
+    D --> E[Implement Single Change]
+    E --> F[Measure Impact]
+    F --> G{Improvement?}
+    G -->|Yes| H[Document Results]
+    G -->|No| I[Rollback Change]
+    H --> J{More Issues?}
+    I --> J
+    J -->|Yes| C
+    J -->|No| K[Performance Optimized]
+    
+    L[Monitoring Tools] --> L1[top/htop]
+    L --> L2[iostat]
+    L --> L3[sar]
+    L --> L4[perf]
+    
+    style A fill:#f66
+    style K fill:#9f6
+    style G fill:#ff9
 ```
 
 ### Key Performance Metrics

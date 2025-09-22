@@ -26,6 +26,42 @@ By the end of this day, you will:
 
 ### Three Pillars of Observability
 
+```mermaid
+flowchart TD
+    A[Observability] --> B[Logs]
+    A --> C[Metrics]
+    A --> D[Traces]
+    
+    B --> B1[Discrete Events<br/>Timestamped]
+    B --> B2[Contextual Info<br/>System state]
+    B --> B3[Debugging<br/>Audit trails]
+    B --> B4[Structured/Unstructured<br/>JSON vs text]
+    
+    C --> C1[Numerical Data<br/>Time series]
+    C --> C2[Aggregatable<br/>Statistics]
+    C --> C3[Alerting<br/>Thresholds]
+    C --> C4[Types<br/>Counter, Gauge, Histogram]
+    
+    D --> D1[Request Flow<br/>Distributed systems]
+    D --> D2[Performance<br/>Bottlenecks]
+    D --> D3[Dependencies<br/>Service mapping]
+    D --> D4[End-to-end<br/>Request lifecycle]
+    
+    E[Observability Stack] --> E1[Collection<br/>Agents, exporters]
+    E --> E2[Storage<br/>Time series, logs]
+    E --> E3[Analysis<br/>Queries, dashboards]
+    E --> E4[Alerting<br/>Notifications]
+    
+    F[Tools] --> F1[Prometheus + Grafana]
+    F --> F2[ELK Stack]
+    F --> F3[Jaeger/Zipkin]
+    F --> F4[OpenTelemetry]
+    
+    style A fill:#f96
+    style E fill:#9f6
+    style F fill:#69f
+```
+
 #### 1. Logs
 - **Discrete events** with timestamps
 - **Contextual information** about system state

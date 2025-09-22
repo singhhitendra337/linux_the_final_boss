@@ -15,6 +15,50 @@ By the end of Day 23, you will:
   - Prepares you for technical interviews and real-world troubleshooting.
   - Covers practical scenarios, command usage, and best practices.
 
+```mermaid
+flowchart TD
+    A[Linux Interview Preparation] --> B[Technical Skills]
+    A --> C[Scenario-Based Questions]
+    A --> D[System Design]
+    A --> E[Troubleshooting Methodology]
+    
+    B --> B1[Command Mastery<br/>Basic to advanced]
+    B --> B2[System Administration<br/>Users, services, security]
+    B --> B3[Networking<br/>Configuration, troubleshooting]
+    B --> B4[Storage Management<br/>Filesystems, LVM, RAID]
+    
+    C --> C1[Performance Issues<br/>High CPU, memory leaks]
+    C --> C2[Security Incidents<br/>Breach response, hardening]
+    C --> C3[Service Outages<br/>Recovery procedures]
+    C --> C4[Automation Tasks<br/>Scripting, deployment]
+    
+    D --> D1[High Availability<br/>Load balancing, clustering]
+    D --> D2[Scalability<br/>Horizontal, vertical scaling]
+    D --> D3[Monitoring<br/>Observability stack]
+    D --> D4[Security Architecture<br/>Defense in depth]
+    
+    E --> E1[Information Gathering<br/>What, when, where]
+    E --> E2[Problem Reproduction<br/>Consistent testing]
+    E --> E3[Log Analysis<br/>System, app, security]
+    E --> E4[Resource Monitoring<br/>CPU, memory, I/O]
+    E --> E5[Hypothesis Testing<br/>One change at a time]
+    E --> E6[Documentation<br/>Solution recording]
+    
+    F[Interview Types] --> F1[Phone/Video Screen]
+    F --> F2[Technical Assessment]
+    F --> F3[On-site/Panel]
+    F --> F4[Practical Demo]
+    
+    G[Common Scenarios] --> G1[Server Performance]
+    G --> G2[Disk Space Issues]
+    G --> G3[Network Problems]
+    G --> G4[Security Incidents]
+    
+    style A fill:#f96
+    style E fill:#9f6
+    style G fill:#69f
+```
+
 - **Common Interview Topics:**
   - Filesystem hierarchy, permissions, process management, networking, scripting, troubleshooting, security, automation
 

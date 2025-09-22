@@ -15,6 +15,48 @@ By the end of Day 16, you will:
   - Protects systems from unauthorized access, data loss, and attacks.
   - Essential for compliance, uptime, and trust.
 
+```mermaid
+flowchart TD
+    A[Linux Security & Hardening] --> B[Network Security]
+    A --> C[System Hardening]
+    A --> D[Access Control]
+    A --> E[Monitoring & Auditing]
+    
+    B --> B1[Firewalls<br/>ufw, iptables, firewalld]
+    B --> B2[Port Management]
+    B --> B3[Service Hardening]
+    B --> B4[Network Encryption]
+    
+    C --> C1[System Updates]
+    C --> C2[Remove Unused Software]
+    C --> C3[File Permissions]
+    C --> C4[Security Tools]
+    
+    D --> D1[User Management]
+    D --> D2[SSH Security]
+    D --> D3[sudo Configuration]
+    D --> D4[Password Policies]
+    
+    E --> E1[Log Analysis]
+    E --> E2[fail2ban]
+    E --> E3[auditd]
+    E --> E4[Intrusion Detection]
+    
+    F[Security Layers] --> F1[Network Perimeter]
+    F --> F2[Host Security]
+    F --> F3[Application Security]
+    F --> F4[Data Encryption]
+    
+    G[Common Threats] --> G1[Brute Force Attacks]
+    G --> G2[Privilege Escalation]
+    G --> G3[Malware/Rootkits]
+    G --> G4[Data Breaches]
+    
+    style A fill:#f96
+    style C fill:#9f6
+    style G fill:#f66
+```
+
 - **User & File Security:**
   - Use strong, unique passwords; enforce password policies (`/etc/login.defs`, `chage`)
   - Limit sudo/root access; use `sudo` logs (`/var/log/auth.log`)

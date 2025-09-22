@@ -33,30 +33,35 @@ Containers are lightweight, portable execution environments that:
 - Maintain security boundaries
 
 ### Container vs Virtual Machines
-```
-Virtual Machines:
-┌─────────────────────────────────────┐
-│           Application               │
-├─────────────────────────────────────┤
-│           Guest OS                  │
-├─────────────────────────────────────┤
-│           Hypervisor                │
-├─────────────────────────────────────┤
-│           Host OS                   │
-├─────────────────────────────────────┤
-│           Hardware                  │
-└─────────────────────────────────────┘
-
-Containers:
-┌─────────────────────────────────────┐
-│           Application               │
-├─────────────────────────────────────┤
-│        Container Runtime            │
-├─────────────────────────────────────┤
-│           Host OS                   │
-├─────────────────────────────────────┤
-│           Hardware                  │
-└─────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph "Virtual Machines"
+        A1[Hardware] --> B1[Host OS]
+        B1 --> C1[Hypervisor]
+        C1 --> D1[VM1: Guest OS + App]
+        C1 --> D2[VM2: Guest OS + App]
+        C1 --> D3[VM3: Guest OS + App]
+    end
+    
+    subgraph "Containers"
+        A2[Hardware] --> B2[Host OS]
+        B2 --> C2[Container Runtime]
+        C2 --> D4[Container 1: App]
+        C2 --> D5[Container 2: App]
+        C2 --> D6[Container 3: App]
+        
+        B2 --> E[Shared Kernel]
+        E --> F[Namespaces]
+        E --> G[cgroups]
+        E --> H[Capabilities]
+    end
+    
+    style D1 fill:#f96
+    style D2 fill:#f96
+    style D3 fill:#f96
+    style D4 fill:#9f6
+    style D5 fill:#9f6
+    style D6 fill:#9f6
 ```
 
 ### Linux Container Technologies

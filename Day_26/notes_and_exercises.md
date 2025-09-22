@@ -13,6 +13,48 @@ By the end of Day 26, you will:
 ## Project Overview
 Welcome to the capstone challenge! This project simulates a real-world scenario where you must set up, secure, automate, and troubleshoot a Linux-based environment for a web application, following best practices from the entire curriculum.
 
+```mermaid
+flowchart TD
+    A[Mega Project: End-to-End Linux Challenge] --> B[Phase 1: Infrastructure]
+    A --> C[Phase 2: Security]
+    A --> D[Phase 3: Web Services]
+    A --> E[Phase 4: Hardening]
+    A --> F[Phase 5: Automation]
+    A --> G[Phase 6: Documentation]
+    
+    B --> B1[Server Provisioning<br/>VM/Cloud setup]
+    B --> B2[System Updates<br/>Package management]
+    B --> B3[Network Config<br/>Hostname, connectivity]
+    
+    C --> C1[User Management<br/>Accounts, groups]
+    C --> C2[SSH Security<br/>Key authentication]
+    C --> C3[Password Policies<br/>Security standards]
+    
+    D --> D1[Web Server<br/>Nginx/Apache]
+    D --> D2[SSL/TLS<br/>Certificate setup]
+    D --> D3[Application Deploy<br/>Web content]
+    
+    E --> E1[Firewall Rules<br/>Network security]
+    E --> E2[Intrusion Detection<br/>fail2ban]
+    E --> E3[File Integrity<br/>Monitoring]
+    
+    F --> F1[Backup Scripts<br/>Automation]
+    F --> F2[System Monitoring<br/>Health checks]
+    F --> F3[Log Management<br/>Centralized logs]
+    
+    G --> G1[Documentation<br/>README, guides]
+    G --> G2[Testing<br/>Validation scripts]
+    G --> G3[Runbooks<br/>Procedures]
+    
+    H[Skills Integration] --> H1[Days 1-5: Fundamentals]
+    H --> H2[Days 6-15: Administration]
+    H --> H3[Days 16-25: Advanced Topics]
+    
+    style A fill:#f96
+    style H fill:#9f6
+    style G fill:#69f
+```
+
 ## Scenario
 **Company:** TechStart Solutions  
 **Role:** Senior DevOps Engineer  

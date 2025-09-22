@@ -39,17 +39,19 @@ By the end of Day 1, you will:
   - **Processes:** Running instances of programs, managed by the kernel.
   - **Init System:** Manages system startup and services (systemd, SysVinit, Upstart).
 
-  ```
-  +-------------------+
-  |   Applications    |
-  +-------------------+
-  |      Shell        |
-  +-------------------+
-  |      Kernel       |
-  +-------------------+
-  |     Hardware      |
-  +-------------------+
-  ```
+```mermaid
+graph TD
+    A[Applications] --> B[Shell]
+    B --> C[System Libraries]
+    C --> D[Linux Kernel]
+    D --> E[Hardware]
+    
+    D --> F[Process Management]
+    D --> G[Memory Management]
+    D --> H[File System]
+    D --> I[Device Drivers]
+    D --> J[Network Stack]
+```
 
 - **Popular Linux Distributions by Category:**
   - **Beginner-friendly:** Ubuntu, Linux Mint, Fedora, openSUSE
@@ -84,6 +86,32 @@ By the end of Day 1, you will:
   - **Security/Penetration Testing:** Kali Linux, Parrot Security
   - **Lightweight/Embedded:** Alpine Linux, Tiny Core, Raspberry Pi OS
   - **Advanced/Customizable:** Arch Linux, Gentoo, Linux From Scratch
+
+```mermaid
+graph LR
+    A[Linux Kernel] --> B[Enterprise]
+    A --> C[Desktop]
+    A --> D[Security]
+    A --> E[Embedded]
+    A --> F[Advanced]
+    
+    B --> B1[RHEL]
+    B --> B2[Ubuntu Server]
+    B --> B3[SUSE Enterprise]
+    
+    C --> C1[Ubuntu]
+    C --> C2[Linux Mint]
+    C --> C3[Fedora]
+    
+    D --> D1[Kali Linux]
+    D --> D2[Parrot Security]
+    
+    E --> E1[Alpine Linux]
+    E --> E2[Raspberry Pi OS]
+    
+    F --> F1[Arch Linux]
+    F --> F2[Gentoo]
+```
 
 - **Package Management by Distro:**
   - **Debian-based:** apt, dpkg (.deb packages) - Ubuntu, Debian, Mint

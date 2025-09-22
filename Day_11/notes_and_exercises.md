@@ -15,6 +15,37 @@ By the end of Day 11, you will:
   - Essential for chaining commands, automating tasks, and flexible file management in Linux.
   - Mastery is expected for DevOps, SRE, and system engineering roles.
 
+```mermaid
+flowchart LR
+    A[Command Input] --> B[Command 1]
+    B -->|Pipe| C[Command 2]
+    C -->|Pipe| D[Command 3]
+    D --> E[Final Output]
+    
+    F[Redirection] --> F1["> Stdout to File"]
+    F --> F2[">> Append to File"]
+    F --> F3["< Input from File"]
+    F --> F4["2> Stderr to File"]
+    F --> F5["&> All Output"]
+    
+    G[Wildcards] --> G1["* Any Characters"]
+    G --> G2["? Single Character"]
+    G --> G3["[] Character Set"]
+    G --> G4["{} Brace Expansion"]
+    
+    H[Links] --> H1["Hard Links<br/>Same Inode"]
+    H --> H2["Symbolic Links<br/>Path Pointer"]
+    
+    I[Pipeline Example] --> J["cat log.txt"]
+    J --> K["grep ERROR"]
+    K --> L["sort"]
+    L --> M["uniq -c"]
+    
+    style A fill:#f96
+    style E fill:#9f6
+    style I fill:#69f
+```
+
 - **Pipes (`|`):**
   - Pass output of one command as input to another.
   - Example: `cat file.txt | grep error | sort | uniq`

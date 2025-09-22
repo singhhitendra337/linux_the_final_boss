@@ -15,6 +15,43 @@ By the end of Day 14, you will:
   - Proactive monitoring prevents outages and enables fast troubleshooting.
   - Log management is essential for auditing, compliance, and root cause analysis.
 
+```mermaid
+flowchart TD
+    A[System Monitoring & Logs] --> B[Real-time Monitoring]
+    A --> C[Resource Monitoring]
+    A --> D[Log Management]
+    A --> E[Performance Analysis]
+    
+    B --> B1[top/htop<br/>Process Viewer]
+    B --> B2[watch<br/>Repeat Commands]
+    B --> B3[tail -f<br/>Live Logs]
+    
+    C --> C1[free<br/>Memory Usage]
+    C --> C2[df/du<br/>Disk Usage]
+    C --> C3[iostat<br/>I/O Stats]
+    C --> C4[vmstat<br/>Virtual Memory]
+    C --> C5[uptime<br/>Load Average]
+    
+    D --> D1[journalctl<br/>systemd Logs]
+    D --> D2[/var/log/*<br/>System Logs]
+    D --> D3[logrotate<br/>Log Rotation]
+    D --> D4[grep/awk<br/>Log Analysis]
+    
+    E --> E1[sar<br/>System Activity]
+    E --> E2[dstat<br/>System Stats]
+    E --> E3[netstat/ss<br/>Network Stats]
+    E --> E4[lsof<br/>Open Files]
+    
+    F[Monitoring Strategy] --> F1[Proactive Alerts]
+    F --> F2[Historical Trends]
+    F --> F3[Capacity Planning]
+    F --> F4[Troubleshooting]
+    
+    style A fill:#f96
+    style D fill:#9f6
+    style F fill:#69f
+```
+
 - **System Monitoring Tools:**
   - `top`, `htop`: Real-time process/resource monitoring
   - `vmstat`: Virtual memory stats

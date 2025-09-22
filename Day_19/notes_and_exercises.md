@@ -15,6 +15,46 @@ By the end of Day 19, you will:
   - Modern systems require robust, flexible, and high-performance storage solutions.
   - Understanding filesystems, quotas, and tuning is essential for reliability and scalability.
 
+```mermaid
+flowchart TD
+    A[Linux Storage & Filesystems] --> B[Filesystem Types]
+    A --> C[Storage Management]
+    A --> D[Performance Tuning]
+    A --> E[Advanced Features]
+    
+    B --> B1[ext4<br/>Reliable, Default]
+    B --> B2[XFS<br/>High Performance]
+    B --> B3[Btrfs<br/>Copy-on-Write]
+    B --> B4[ZFS<br/>Enterprise]
+    B --> B5[NTFS/FAT32<br/>Compatibility]
+    
+    C --> C1[Partitioning<br/>fdisk, parted]
+    C --> C2[Formatting<br/>mkfs commands]
+    C --> C3[Mounting<br/>mount, fstab]
+    C --> C4[Disk Quotas<br/>User/Group limits]
+    
+    D --> D1[Mount Options<br/>noatime, barrier]
+    D --> D2[I/O Schedulers<br/>deadline, noop]
+    D --> D3[SSD Optimization<br/>TRIM, alignment]
+    D --> D4[Block Size Tuning]
+    
+    E --> E1[Snapshots<br/>Point-in-time]
+    E --> E2[Compression<br/>Space saving]
+    E --> E3[Encryption<br/>LUKS, dm-crypt]
+    E --> E4[Checksumming<br/>Data integrity]
+    
+    F[Storage Stack] --> F1[Applications]
+    F1 --> F2[VFS Layer]
+    F2 --> F3[Filesystem]
+    F3 --> F4[Block Layer]
+    F4 --> F5[Device Drivers]
+    F5 --> F6[Physical Storage]
+    
+    style A fill:#f96
+    style B fill:#9f6
+    style F fill:#69f
+```
+
 - **Common Linux Filesystems:**
   - `ext4`: Default on most distros; journaling, large file support, stable.
   - `xfs`: High-performance, scalable, good for large files and parallel I/O.

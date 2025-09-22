@@ -42,6 +42,38 @@ By the end of Day 10, you will:
   - Add functions: e.g., `mkcd() { mkdir -p "$1" && cd "$1"; }`
   - Source file to apply changes: `source ~/.bashrc`
 
+```mermaid
+flowchart TD
+    A[Shell Customization] --> B[Environment Variables]
+    A --> C[Aliases]
+    A --> D[Functions]
+    A --> E[Prompt Customization]
+    
+    B --> B1[export PATH=$PATH:/new/path]
+    B --> B2[export EDITOR=vim]
+    
+    C --> C1[alias ll='ls -la']
+    C --> C2[alias gs='git status']
+    
+    D --> D1[mkcd function]
+    D --> D2[backup function]
+    
+    E --> E1[PS1 customization]
+    E --> E2[Color prompts]
+    
+    F[Configuration Files] --> F1[~/.bashrc]
+    F --> F2[~/.bash_profile]
+    F --> F3[~/.zshrc]
+    
+    B1 --> G[source ~/.bashrc]
+    C1 --> G
+    D1 --> G
+    E1 --> G
+    
+    style A fill:#f96
+    style G fill:#9f6
+```
+
 - **Best Practices:**
   - Keep customizations under version control (e.g., dotfiles repo)
   - Comment your aliases and functions

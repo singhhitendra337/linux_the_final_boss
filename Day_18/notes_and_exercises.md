@@ -15,6 +15,48 @@ By the end of Day 18, you will:
   - Serve web content, APIs, and enable application delivery.
   - Core skill for DevOps, SRE, and cloud engineers.
 
+```mermaid
+flowchart TD
+    A[Web Server Architecture] --> B[Web Servers]
+    A --> C[Reverse Proxy]
+    A --> D[Load Balancing]
+    A --> E[SSL/TLS]
+    
+    B --> B1[Apache<br/>Process-based]
+    B --> B2[Nginx<br/>Event-driven]
+    B --> B3[Lighttpd<br/>Lightweight]
+    B --> B4[Caddy<br/>Auto HTTPS]
+    
+    C --> C1[Backend Routing]
+    C --> C2[SSL Termination]
+    C --> C3[Caching]
+    C --> C4[Header Modification]
+    
+    D --> D1[Round Robin]
+    D --> D2[Least Connections]
+    D --> D3[IP Hash]
+    D --> D4[Health Checks]
+    
+    E --> E1[Let's Encrypt]
+    E --> E2[SSL Certificates]
+    E --> E3[Security Headers]
+    E --> E4[HTTPS Redirect]
+    
+    F[Request Flow] --> F1[Client]
+    F1 --> F2[Web Server]
+    F2 --> F3[Application]
+    F3 --> F4[Database]
+    
+    G[Configuration] --> G1[Virtual Hosts]
+    G --> G2[Server Blocks]
+    G --> G3[Modules/Plugins]
+    G --> G4[Log Management]
+    
+    style A fill:#f96
+    style B fill:#9f6
+    style F fill:#69f
+```
+
 - **Apache HTTP Server:**
   - Install: `apt install apache2` or `yum install httpd`
   - Start/stop: `systemctl start|stop apache2` or `httpd`

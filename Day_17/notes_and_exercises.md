@@ -15,6 +15,47 @@ By the end of Day 17, you will:
   - Ensures easy installation, updating, and removal of software.
   - Critical for system security, stability, and automation.
 
+```mermaid
+flowchart TD
+    A[Package Management] --> B[Debian Family]
+    A --> C[Red Hat Family]
+    A --> D[Universal Packages]
+    A --> E[Package Operations]
+    
+    B --> B1[apt<br/>High-level Tool]
+    B --> B2[dpkg<br/>Low-level Tool]
+    B --> B3[.deb Packages]
+    B --> B4[Ubuntu PPAs]
+    
+    C --> C1[dnf/yum<br/>High-level Tool]
+    C --> C2[rpm<br/>Low-level Tool]
+    C --> C3[.rpm Packages]
+    C --> C4[EPEL Repository]
+    
+    D --> D1[snap<br/>Universal Packages]
+    D --> D2[flatpak<br/>Sandboxed Apps]
+    D --> D3[AppImage<br/>Portable Apps]
+    
+    E --> E1[Install/Remove]
+    E --> E2[Update/Upgrade]
+    E --> E3[Search/List]
+    E --> E4[Repository Management]
+    E --> E5[Dependency Resolution]
+    
+    F[Package Sources] --> F1[Official Repositories]
+    F --> F2[Third-party Repos]
+    F --> F3[Local Files]
+    F --> F4[Source Code]
+    
+    G[Security] --> G1[GPG Verification]
+    G --> G2[Package Signatures]
+    G --> G3[Trusted Sources]
+    
+    style A fill:#f96
+    style E fill:#9f6
+    style G fill:#69f
+```
+
 - **Debian/Ubuntu Tools:**
   - `apt update`, `apt upgrade`, `apt install <pkg>`, `apt remove <pkg>`, `apt search <pattern>`, `apt show <pkg>`, `apt list --installed`
   - `dpkg -i <file.deb>`, `dpkg -r <pkg>`, `dpkg -l`, `dpkg -L <pkg>`

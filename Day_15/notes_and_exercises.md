@@ -33,6 +33,33 @@ By the end of Day 15, you will:
   - Inspect firewall rules (`iptables`, `ufw`, `firewalld`)
   - Review logs (`/var/log/syslog`, `/var/log/messages`)
 
+```mermaid
+flowchart TD
+    A[Network Issue] --> B[Check Physical Layer]
+    B --> C[Check Interface Status]
+    C --> D[Test Local Connectivity]
+    D --> E[Test Remote Connectivity]
+    E --> F[Check DNS Resolution]
+    F --> G[Inspect Firewall Rules]
+    G --> H[Review System Logs]
+    
+    B --> B1["ip link show<br/>ethtool eth0"]
+    C --> C1["ip addr show<br/>ifconfig"]
+    D --> D1["ping 127.0.0.1<br/>ping gateway"]
+    E --> E1["ping 8.8.8.8<br/>traceroute google.com"]
+    F --> F1["nslookup google.com<br/>dig google.com"]
+    G --> G1["iptables -L<br/>ufw status"]
+    H --> H1["/var/log/syslog<br/>journalctl -u network"]
+    
+    I[Network Tools] --> I1[ss -tuln]
+    I --> I2[netstat -i]
+    I --> I3[mtr google.com]
+    I --> I4[tcpdump -i eth0]
+    
+    style A fill:#f66
+    style H fill:#9f6
+```
+
 - **Best Practices:**
   - Document network configs and changes
   - Use version control for config files

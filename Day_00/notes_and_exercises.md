@@ -24,6 +24,32 @@ By the end of Day 0, you will:
   - Virtualization, networking, security, and automation
   - Real-world scenarios, troubleshooting, and a mega project
 
+```mermaid
+flowchart TD
+    A[Linux Learning Journey] --> B[Fundamentals]
+    A --> C[System Administration]
+    A --> D[Advanced Topics]
+    A --> E[Real-World Projects]
+    
+    B --> B1[Commands & File System]
+    B --> B2[Users & Permissions]
+    B --> B3[Process Management]
+    
+    C --> C1[Networking]
+    C --> C2[Security]
+    C --> C3[Service Management]
+    
+    D --> D1[Performance Tuning]
+    D --> D2[Containers]
+    D --> D3[Troubleshooting]
+    
+    E --> E1[DevOps Scenarios]
+    E --> E2[Mega Project]
+    
+    style A fill:#f96
+    style E2 fill:#9f6
+```
+
 - **How to Get the Most Out of This Course:**
   - Practice hands-on with every topic (use a VM, WSL, or cloud instance)
   - Complete all exercises and review solutions

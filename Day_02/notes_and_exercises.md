@@ -17,6 +17,26 @@ By the end of Day 2, you will:
     - Type 1 (bare-metal): Runs directly on hardware (e.g., VMware ESXi, Microsoft Hyper-V)
     - Type 2 (hosted): Runs on top of an existing OS (e.g., VirtualBox, VMware Workstation)
 
+```mermaid
+graph TD
+    subgraph "Type 1 Hypervisor (Bare Metal)"
+        A[Hardware] --> B[Type 1 Hypervisor<br/>VMware ESXi, Hyper-V]
+        B --> C[VM1<br/>Linux]
+        B --> D[VM2<br/>Windows]
+        B --> E[VM3<br/>FreeBSD]
+    end
+    
+    subgraph "Type 2 Hypervisor (Hosted)"
+        F[Hardware] --> G[Host OS<br/>Windows/Linux/macOS]
+        G --> H[Type 2 Hypervisor<br/>VirtualBox, VMware Workstation]
+        H --> I[VM1<br/>Linux]
+        H --> J[VM2<br/>Windows]
+    end
+    
+    style B fill:#f96
+    style H fill:#69f
+```
+
 
 
 - **Why Use Virtualization?**
@@ -61,6 +81,32 @@ By the end of Day 2, you will:
   - **Linode:** Nanode 1GB for $5/month
   - **Key features:** Auto-scaling, load balancing, managed services
   - **Security:** SSH keys, security groups, firewalls
+
+```mermaid
+flowchart LR
+    A[Choose Cloud Provider] --> B{Provider Type}
+    B -->|AWS| C[EC2 Instance]
+    B -->|Google Cloud| D[Compute Engine]
+    B -->|Azure| E[Virtual Machine]
+    B -->|DigitalOcean| F[Droplet]
+    
+    C --> G[Select AMI<br/>Ubuntu/Amazon Linux]
+    D --> H[Select Image<br/>Ubuntu/Debian]
+    E --> I[Select Image<br/>Ubuntu/CentOS]
+    F --> J[Select Image<br/>Ubuntu/Fedora]
+    
+    G --> K[Configure Security Groups]
+    H --> K
+    I --> K
+    J --> K
+    
+    K --> L[Generate SSH Key Pair]
+    L --> M[Launch Instance]
+    M --> N[Connect via SSH]
+    
+    style A fill:#f96
+    style M fill:#9f6
+```
 
 - **Best Practices:**
   - Allocate enough resources for smooth operation

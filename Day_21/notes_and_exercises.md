@@ -16,6 +16,44 @@ By the end of Day 21, you will:
 - Enables flexible, scalable, and reliable storage management.
 - Essential for handling growing data, backups, and disaster recovery.
 
+```mermaid
+flowchart TD
+    A[Volume Management] --> B[LVM Structure]
+    A --> C[RAID Levels]
+    A --> D[Advanced Features]
+    
+    B --> B1[Physical Volumes<br/>PV - Raw disks]
+    B1 --> B2[Volume Groups<br/>VG - Pool of PVs]
+    B2 --> B3[Logical Volumes<br/>LV - Virtual partitions]
+    B3 --> B4[Filesystems<br/>ext4, xfs, etc.]
+    
+    C --> C1[RAID 0<br/>Striping, Performance]
+    C --> C2[RAID 1<br/>Mirroring, Redundancy]
+    C --> C3[RAID 5<br/>Parity, Space efficient]
+    C --> C4[RAID 6<br/>Double parity]
+    C --> C5[RAID 10<br/>Stripe + Mirror]
+    
+    D --> D1[Snapshots<br/>Point-in-time copies]
+    D --> D2[Online Resizing<br/>Grow/shrink volumes]
+    D --> D3[Thin Provisioning<br/>Overcommit storage]
+    D --> D4[Striping<br/>Performance boost]
+    
+    E[Management Tools] --> E1[LVM Commands<br/>pvcreate, vgcreate, lvcreate]
+    E --> E2[RAID Tools<br/>mdadm, /proc/mdstat]
+    E --> E3[Monitoring<br/>lvs, vgs, pvs]
+    
+    F[Storage Flow] --> F1[Physical Disks]
+    F1 --> F2[RAID Array]
+    F2 --> F3[Physical Volume]
+    F3 --> F4[Volume Group]
+    F4 --> F5[Logical Volume]
+    F5 --> F6[Filesystem]
+    
+    style A fill:#f96
+    style B fill:#9f6
+    style C fill:#69f
+```
+
 - **LVM Components:**
   - **Physical Volume (PV):** Raw disk or partition
   - **Volume Group (VG):** Pool of PVs

@@ -30,6 +30,33 @@ By the end of Day 13, you will:
   - `anacron`: Run periodic jobs not guaranteed to run at set times (good for laptops)
     - Config: `/etc/anacrontab`
 
+```mermaid
+flowchart TD
+    A[Job Scheduling] --> B[cron<br/>Recurring Tasks]
+    A --> C[at<br/>One-time Tasks]
+    A --> D[anacron<br/>Periodic Tasks]
+    
+    B --> B1[crontab -e]
+    B --> B2["* * * * * command"]
+    B --> B3[System cron<br/>/etc/crontab]
+    
+    C --> C1[at 10:00]
+    C --> C2[atq - list jobs]
+    C --> C3[atrm - remove job]
+    
+    D --> D1[/etc/anacrontab]
+    D --> D2[Handles missed jobs]
+    
+    B2 --> E["0 2 * * * /backup.sh<br/>Daily at 2 AM"]
+    B2 --> F["*/5 * * * * /check.sh<br/>Every 5 minutes"]
+    B2 --> G["0 0 * * 0 /weekly.sh<br/>Weekly on Sunday"]
+    
+    style A fill:#f96
+    style B fill:#9f6
+    style C fill:#69f
+    style D fill:#f69
+```
+
 - **Crontab Examples:**
   - `0 2 * * * /usr/bin/backup.sh` — Run daily at 2am
   - `*/5 * * * * /usr/bin/check.sh` — Every 5 minutes

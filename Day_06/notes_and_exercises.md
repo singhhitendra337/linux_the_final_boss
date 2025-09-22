@@ -15,6 +15,27 @@ By the end of Day 6, you will:
   - These commands are essential for text processing, automation, and efficient system administration.
   - Mastery of these tools is expected in DevOps, SRE, and system engineering interviews.
 
+```mermaid
+flowchart LR
+    A[Raw Data] --> B[grep<br/>Filter Lines]
+    B --> C[awk<br/>Extract Fields]
+    C --> D[sed<br/>Transform Text]
+    D --> E[sort<br/>Order Data]
+    E --> F[uniq<br/>Remove Duplicates]
+    F --> G[Processed Output]
+    
+    H[Text Processing Tools] --> H1[grep - Pattern Matching]
+    H --> H2[awk - Field Processing]
+    H --> H3[sed - Stream Editing]
+    H --> H4[cut - Column Extraction]
+    H --> H5[tr - Character Translation]
+    H --> H6[find - File Search]
+    H --> H7[xargs - Command Building]
+    
+    style A fill:#f96
+    style G fill:#9f6
+```
+
 - **grep (Global Regular Expression Print):**
   ```bash
   # Basic usage

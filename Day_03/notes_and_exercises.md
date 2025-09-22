@@ -44,31 +44,37 @@ By the end of Day 3, you will:
     - `/media`: Removable media (USB, CD-ROM)
     - `/srv`: Data for services (web, ftp)
 
-  ```
-  /
-  |-- bin
-  |-- sbin
-  |-- lib
-  |-- lib64
-  |-- boot
-  |-- dev
-  |-- etc
-  |-- proc
-  |-- sys
-  |-- run
-  |-- home
-  |-- root
-  |-- var
-  |-- tmp
-  |-- usr
-  |-- usr/bin
-  |-- usr/sbin
-  |-- usr/local
-  |-- opt
-  |-- mnt
-  |-- media
-  |-- srv
-  ```
+```mermaid
+graph TD
+    A["/"] --> B["/bin"]
+    A --> C["/sbin"]
+    A --> D["/lib"]
+    A --> E["/etc"]
+    A --> F["/home"]
+    A --> G["/var"]
+    A --> H["/usr"]
+    A --> I["/tmp"]
+    A --> J["/boot"]
+    A --> K["/dev"]
+    A --> L["/proc"]
+    A --> M["/sys"]
+    
+    F --> F1["/home/user1"]
+    F --> F2["/home/user2"]
+    
+    G --> G1["/var/log"]
+    G --> G2["/var/lib"]
+    G --> G3["/var/www"]
+    
+    H --> H1["/usr/bin"]
+    H --> H2["/usr/lib"]
+    H --> H3["/usr/local"]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px
+    style F fill:#bfb,stroke:#333,stroke-width:2px
+```
 
 - **File Types in Linux:**
   - Regular files: Text, binary, scripts, etc.
@@ -87,13 +93,21 @@ By the end of Day 3, you will:
   | Directories     | Yes (with -s)          | No                  |
   | If target gone  | Dangling (broken)      | File remains        |
 
-  **Diagram:**
-  ```
-  [file.txt] <--- hardlink.txt (same inode)
-      ^
-      |
-  symlink.txt (points to file.txt, different inode)
-  ```
+```mermaid
+graph LR
+    A[file.txt<br/>inode: 12345] 
+    B[hardlink.txt<br/>inode: 12345]
+    C[symlink.txt<br/>inode: 67890]
+    
+    A -.-> D[Same Inode]
+    B -.-> D
+    C --> A
+    
+    style A fill:#bfb
+    style B fill:#bfb
+    style C fill:#fbb
+    style D fill:#fff,stroke-dasharray: 5 5
+```
 
 - **Commands to Identify File Types:**
   - `ls -l`: Shows file type in first character:

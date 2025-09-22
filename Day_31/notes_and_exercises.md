@@ -25,20 +25,32 @@ By the end of this day, you will:
 ## Troubleshooting Methodology
 
 ### Systematic Approach
-```
-1. DEFINE the problem
-   ↓
-2. GATHER information
-   ↓
-3. HYPOTHESIZE root cause
-   ↓
-4. TEST hypothesis
-   ↓
-5. IMPLEMENT solution
-   ↓
-6. VERIFY fix
-   ↓
-7. DOCUMENT findings
+```mermaid
+flowchart TD
+    A[Problem Reported] --> B[Define Problem]
+    B --> C[Gather Information]
+    C --> D[Hypothesize Root Cause]
+    D --> E[Test Hypothesis]
+    E --> F{Solution Works?}
+    F -->|Yes| G[Implement Solution]
+    F -->|No| D
+    G --> H[Verify Fix]
+    H --> I[Document Findings]
+    I --> J[Problem Resolved]
+    
+    K[Troubleshooting Tools] --> K1[System Analysis<br/>top, ps, lsof]
+    K --> K2[Network Tools<br/>netstat, tcpdump]
+    K --> K3[Tracing Tools<br/>strace, perf, eBPF]
+    K --> K4[Log Analysis<br/>journalctl, grep]
+    
+    L[Information Sources] --> L1[System Logs]
+    L --> L2[Performance Metrics]
+    L --> L3[Configuration Files]
+    L --> L4[User Reports]
+    
+    style A fill:#f66
+    style J fill:#9f6
+    style F fill:#ff9
 ```
 
 ### Problem Classification

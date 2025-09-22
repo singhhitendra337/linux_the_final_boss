@@ -15,6 +15,40 @@ By the end of Day 12, you will:
   - Save disk space, speed up transfers, and protect data from loss.
   - Essential for system admins, DevOps, and SREs.
 
+```mermaid
+flowchart TD
+    A[Data Management] --> B[Compression]
+    A --> C[Archiving]
+    A --> D[Backup Strategies]
+    
+    B --> B1[gzip<br/>Fast, Common]
+    B --> B2[bzip2<br/>Better Ratio]
+    B --> B3[xz<br/>Best Compression]
+    B --> B4[zip<br/>Cross-platform]
+    
+    C --> C1[tar<br/>Tape Archive]
+    C --> C2[cpio<br/>Copy In/Out]
+    C --> C3[Combined<br/>tar + compression]
+    
+    D --> D1[Full Backup<br/>Complete Copy]
+    D --> D2[Incremental<br/>Changes Only]
+    D --> D3[Differential<br/>Since Last Full]
+    D --> D4[Snapshot<br/>Point in Time]
+    
+    E[Backup Tools] --> E1[rsync<br/>Synchronization]
+    E --> E2[dd<br/>Disk Image]
+    E --> E3[tar<br/>Archive]
+    E --> E4[cron<br/>Automation]
+    
+    F[3-2-1 Rule] --> F1[3 Copies]
+    F --> F2[2 Different Media]
+    F --> F3[1 Offsite]
+    
+    style A fill:#f96
+    style D fill:#9f6
+    style F fill:#69f
+```
+
 - **Compression Tools:**
   - `gzip file` — Compresses to file.gz; `gunzip file.gz` decompresses
   - `bzip2 file` — Compresses to file.bz2; `bunzip2 file.bz2` decompresses

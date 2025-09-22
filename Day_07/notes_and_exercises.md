@@ -15,6 +15,40 @@ By the end of Day 7, you will:
   - User and group management is foundational for system security, access control, and multi-user collaboration.
   - Proper configuration prevents privilege escalation and accidental data exposure.
 
+```mermaid
+flowchart TD
+    A[User & Group Management] --> B[User Operations]
+    A --> C[Group Operations]
+    A --> D[Permission Management]
+    
+    B --> B1[useradd - Create User]
+    B --> B2[usermod - Modify User]
+    B --> B3[userdel - Delete User]
+    B --> B4[passwd - Set Password]
+    
+    C --> C1[groupadd - Create Group]
+    C --> C2[groupmod - Modify Group]
+    C --> C3[groupdel - Delete Group]
+    C --> C4[gpasswd - Group Password]
+    
+    D --> D1[chmod - Change Permissions]
+    D --> D2[chown - Change Owner]
+    D --> D3[chgrp - Change Group]
+    D --> D4[Special Permissions]
+    
+    D4 --> E1[SUID - Run as Owner]
+    D4 --> E2[SGID - Run as Group]
+    D4 --> E3[Sticky Bit - Restrict Delete]
+    
+    F[Permission Types] --> F1[Read - r - 4]
+    F --> F2[Write - w - 2]
+    F --> F3[Execute - x - 1]
+    
+    style A fill:#f96
+    style D fill:#9f6
+    style D4 fill:#f69
+```
+
 - **User Concepts:**
   - Each user has a unique UID (User ID) and a default group (GID).
   - System users (UID < 1000) vs. regular users (UID >= 1000).

@@ -17,6 +17,49 @@ By the end of Day 24, you will:
 - Ensures system stability and compliance.
 - Reduces risk of compromise and downtime.
 
+```mermaid
+flowchart TD
+    A[System Updates & Patching] --> B[Update Types]
+    A --> C[Update Process]
+    A --> D[Automation]
+    A --> E[Testing & Validation]
+    
+    B --> B1[Security Updates<br/>Critical patches]
+    B --> B2[Bug Fixes<br/>Stability improvements]
+    B --> B3[Feature Updates<br/>New functionality]
+    B --> B4[Kernel Updates<br/>Core improvements]
+    
+    C --> C1[Assessment<br/>Available updates]
+    C --> C2[Planning<br/>Maintenance windows]
+    C --> C3[Testing<br/>Staging environment]
+    C --> C4[Deployment<br/>Production rollout]
+    C --> C5[Verification<br/>Post-update checks]
+    
+    D --> D1[Automated Updates<br/>unattended-upgrades]
+    D --> D2[Scheduled Patching<br/>Cron jobs]
+    D --> D3[Configuration Mgmt<br/>Ansible, Puppet]
+    D --> D4[Update Notifications<br/>Alerts, reports]
+    
+    E --> E1[Pre-update Backup<br/>System snapshots]
+    E --> E2[Staging Tests<br/>Compatibility checks]
+    E --> E3[Rollback Plan<br/>Recovery procedures]
+    E --> E4[Health Monitoring<br/>Post-update validation]
+    
+    F[Update Tools] --> F1[apt/yum/dnf<br/>Package managers]
+    F --> F2[unattended-upgrades<br/>Automatic security]
+    F --> F3[yum-cron/dnf-automatic<br/>Scheduled updates]
+    F --> F4[Custom Scripts<br/>Automation]
+    
+    G[Update Strategy] --> G1[Manual Control]
+    G --> G2[Automated Security]
+    G --> G3[Staged Rollout]
+    G --> G4[Emergency Patches]
+    
+    style A fill:#f96
+    style C fill:#9f6
+    style E fill:#69f
+```
+
 - **Update Types:**
   - **Security Updates:** Critical patches for vulnerabilities
   - **Bug Fixes:** Stability and functionality improvements

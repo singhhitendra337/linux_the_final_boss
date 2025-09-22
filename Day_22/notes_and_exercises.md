@@ -16,6 +16,48 @@ By the end of Day 22, you will:
 - Secures data in transit, enables HTTPS, and builds trust for users.
 - Essential for web servers, APIs, and secure communications.
 
+```mermaid
+flowchart TD
+    A[Certificate Management] --> B[Certificate Types]
+    A --> C[Certificate Lifecycle]
+    A --> D[Tools & Automation]
+    A --> E[Security Practices]
+    
+    B --> B1[Self-signed<br/>Testing/Internal]
+    B --> B2[CA-signed<br/>Production/Public]
+    B --> B3[Wildcard<br/>*.domain.com]
+    B --> B4[Multi-domain<br/>SAN certificates]
+    
+    C --> C1[Generation<br/>Private key + CSR]
+    C --> C2[Signing<br/>CA validation]
+    C --> C3[Installation<br/>Web server config]
+    C --> C4[Renewal<br/>Before expiration]
+    C --> C5[Revocation<br/>Compromise/replacement]
+    
+    D --> D1[OpenSSL<br/>Manual management]
+    D --> D2[Certbot<br/>Let's Encrypt automation]
+    D --> D3[ACME clients<br/>Automated renewal]
+    D --> D4[Certificate stores<br/>System trust]
+    
+    E --> E1[Key Security<br/>Protect private keys]
+    E --> E2[Regular Renewal<br/>Avoid expiration]
+    E --> E3[Monitoring<br/>Certificate health]
+    E --> E4[Backup & Recovery<br/>Certificate copies]
+    
+    F[Certificate Chain] --> F1[Root CA]
+    F1 --> F2[Intermediate CA]
+    F2 --> F3[Server Certificate]
+    
+    G[SSL/TLS Process] --> G1[Client Hello]
+    G1 --> G2[Server Certificate]
+    G2 --> G3[Key Exchange]
+    G3 --> G4[Encrypted Communication]
+    
+    style A fill:#f96
+    style C fill:#9f6
+    style E fill:#69f
+```
+
 - **SSL/TLS Fundamentals:**
   - **Encryption:** Protects data in transit
   - **Authentication:** Verifies server identity

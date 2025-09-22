@@ -44,6 +44,36 @@ By the end of Day 20, you will:
   echo "Script execution"
   ```
 
+```mermaid
+flowchart TD
+    A[Shell Script] --> B[Shebang<br/>#!/bin/bash]
+    B --> C[Comments & Documentation]
+    C --> D[Variable Declarations]
+    D --> E[Function Definitions]
+    E --> F[Main Script Logic]
+    
+    F --> G[Conditionals]
+    F --> H[Loops]
+    F --> I[User Input]
+    F --> J[Error Handling]
+    
+    G --> G1["if [[ condition ]]; then"]
+    G --> G2["case $var in"]
+    
+    H --> H1["for item in list"]
+    H --> H2["while condition"]
+    
+    I --> I1["read -p 'Enter: ' var"]
+    I --> I2["Command line args $1 $2"]
+    
+    J --> J1["set -e (exit on error)"]
+    J --> J2["trap 'cleanup' EXIT"]
+    
+    style A fill:#f96
+    style B fill:#9f6
+    style J fill:#f69
+```
+
 - **Essential Commands:**
   - **Output:** `echo`, `printf`
   - **Input:** `read`

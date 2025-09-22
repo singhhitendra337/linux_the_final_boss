@@ -16,6 +16,39 @@ By the end of Day 8, you will:
   - Text editors are crucial for editing config files, scripts, and documentation
   - Understanding file attributes helps with troubleshooting and security
 
+```mermaid
+flowchart TD
+    A[File Management & Editors] --> B[Text Editors]
+    A --> C[File Operations]
+    A --> D[File Attributes]
+    
+    B --> B1[nano<br/>Beginner Friendly]
+    B --> B2[vi/vim<br/>Modal Editor]
+    B --> B3[emacs<br/>Advanced]
+    
+    B1 --> E1[Ctrl+O Save]
+    B1 --> E2[Ctrl+X Exit]
+    B1 --> E3[Ctrl+W Search]
+    
+    B2 --> F1[Normal Mode]
+    B2 --> F2[Insert Mode]
+    B2 --> F3[Command Mode]
+    
+    C --> C1[stat - File Info]
+    C --> C2[diff - Compare]
+    C --> C3[wc - Count]
+    C --> C4[touch - Timestamps]
+    
+    D --> D1[lsattr - List Attributes]
+    D --> D2[chattr - Change Attributes]
+    D --> D3[getfacl - ACL Info]
+    D --> D4[setfacl - Set ACL]
+    
+    style B1 fill:#9f6
+    style B2 fill:#f96
+    style A fill:#69f
+```
+
 - **Advanced File Operations:**
   ```bash
   # File attributes

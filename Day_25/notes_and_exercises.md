@@ -22,6 +22,38 @@ By the end of Day 25, you will:
   - **Fail Secure:** Secure defaults when systems fail
   - **Security by Design:** Built-in security measures
 
+```mermaid
+graph TD
+    A[System Hardening] --> B[Network Security]
+    A --> C[Access Control]
+    A --> D[Service Hardening]
+    A --> E[File System Security]
+    A --> F[Monitoring & Auditing]
+    
+    B --> B1[Firewall Rules]
+    B --> B2[fail2ban]
+    B --> B3[Network Segmentation]
+    
+    C --> C1[User Management]
+    C --> C2[SSH Hardening]
+    C --> C3[sudo Configuration]
+    
+    D --> D1[Disable Unused Services]
+    D --> D2[Service Configuration]
+    D --> D3[Resource Limits]
+    
+    E --> E1[File Permissions]
+    E --> E2[Encryption]
+    E --> E3[Integrity Monitoring]
+    
+    F --> F1[auditd]
+    F --> F2[Log Management]
+    F --> F3[SIEM Integration]
+    
+    style A fill:#f96
+    style F fill:#9f6
+```
+
 - **Hardening Categories:**
   ```bash
   # Service Hardening

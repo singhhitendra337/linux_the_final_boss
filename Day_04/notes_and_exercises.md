@@ -21,6 +21,28 @@ By the end of Day 4, you will:
   3. **Kernel:** Initializes hardware, mounts root filesystem, starts the first process (init/systemd).
   4. **Init System (systemd, SysVinit, Upstart):** Launches system services and user sessions.
 
+```mermaid
+flowchart TD
+    A[Power On] --> B[BIOS/UEFI]
+    B --> C[Hardware Initialization]
+    C --> D[Bootloader<br/>GRUB/LILO]
+    D --> E[Load Kernel]
+    E --> F[Kernel Initialization]
+    F --> G[Mount Root Filesystem]
+    G --> H[Start Init Process<br/>PID 1]
+    H --> I[systemd/SysVinit]
+    I --> J[System Services]
+    I --> K[User Sessions]
+    J --> L[Network]
+    J --> M[SSH]
+    J --> N[Web Server]
+    K --> O[Login Shell]
+    
+    style A fill:#f96
+    style H fill:#9f6
+    style I fill:#69f
+```
+
 
 
 - **Bootloader Details:**

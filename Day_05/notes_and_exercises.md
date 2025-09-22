@@ -35,6 +35,39 @@ By the end of Day 5, you will:
   - `cat`, `less`, `more`: View file contents
   - `head -n <N>`, `tail -n <N>`, `tail -f <file>`: View first/last N lines, follow file (logs)
 
+```mermaid
+flowchart TD
+    A[File Operations] --> B[Create]
+    A --> C[Copy]
+    A --> D[Move/Rename]
+    A --> E[Delete]
+    A --> F[View]
+    
+    B --> B1[touch file.txt]
+    B --> B2[mkdir directory]
+    B --> B3[mkdir -p path/to/dir]
+    
+    C --> C1[cp file1 file2]
+    C --> C2[cp -r dir1 dir2]
+    C --> C3[cp -i source dest]
+    
+    D --> D1[mv file1 file2]
+    D --> D2[mv file1 /new/path/]
+    
+    E --> E1[rm file.txt]
+    E --> E2[rm -r directory]
+    E --> E3[rm -rf directory]
+    
+    F --> F1[cat file.txt]
+    F --> F2[less file.txt]
+    F --> F3[head -10 file.txt]
+    F --> F4[tail -f log.txt]
+    
+    style A fill:#f96
+    style B fill:#9f6
+    style E fill:#f66
+```
+
 - **Searching & Utilities:**
   - `grep <pattern> <file>`, `grep -i`, `grep -r`, `grep -v`, `grep -n`: Search, ignore case, recursive, invert match, show line numbers
   - `find <path> -name <pattern>`, `find <path> -type f -size +10M`: Find files by name, type, size
