@@ -37,7 +37,7 @@ flowchart TD
     A --> D[anacron<br/>Periodic Tasks]
     
     B --> B1[crontab -e]
-    B --> B2["* * * * * command"]
+    B --> B2[Cron Syntax<br/>min hour day month weekday]
     B --> B3[System cron<br/>/etc/crontab]
     
     C --> C1[at 10:00]
@@ -47,9 +47,9 @@ flowchart TD
     D --> D1[/etc/anacrontab]
     D --> D2[Handles missed jobs]
     
-    B2 --> E["0 2 * * * /backup.sh<br/>Daily at 2 AM"]
-    B2 --> F["*/5 * * * * /check.sh<br/>Every 5 minutes"]
-    B2 --> G["0 0 * * 0 /weekly.sh<br/>Weekly on Sunday"]
+    B2 --> E[Daily Backup<br/>0 2 * * *]
+    B2 --> F[Every 5 min<br/>*/5 * * * *]
+    B2 --> G[Weekly Task<br/>0 0 * * 0]
     
     style A fill:#f96
     style B fill:#9f6
