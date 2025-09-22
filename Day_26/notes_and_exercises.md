@@ -1,4 +1,4 @@
-# Day 24: Mega Project – End-to-End DevOps/Linux Challenge
+# Day 26: Mega Project – End-to-End DevOps/Linux Challenge
 
 ## Project Overview
 Welcome to the capstone challenge! This project simulates a real-world scenario where you must set up, secure, automate, and troubleshoot a Linux-based environment for a web application, following best practices from the entire curriculum.
@@ -31,18 +31,11 @@ You are hired as a DevOps Engineer for a startup. Your task is to:
    - Configure a virtual host/server block for a static website
    - Set correct permissions for web content
    - Enable and test HTTPS (self-signed or Let's Encrypt)
-4. **Security Hardening & System Hardening:**
+4. **Security Hardening:**
    - Configure the firewall to allow only necessary ports
    - Disable root SSH login and enforce key-based auth
    - Set up fail2ban or similar for brute-force protection
    - Regularly update and audit the system
-   - Remove unnecessary packages and services
-   - Set correct file and directory permissions (umask, chmod, chown)
-   - Enforce password policies and account lockouts
-   - Enable and configure SELinux or AppArmor (if available)
-   - Configure logging and log rotation
-   - Restrict cron and at usage
-   - Set up automatic security updates
 5. **Automation & Backups:**
    - Write scripts to automate backups of web content and configs
    - Schedule backups with cron
@@ -60,8 +53,6 @@ You are hired as a DevOps Engineer for a startup. Your task is to:
 - Use version control for scripts and configs
 - Test all automation in a staging environment first
 - Regularly review logs and monitor key metrics
-- Harden the system using CIS benchmarks or similar guidelines
-- Document all hardening steps and verify compliance
 
 ## Deliverables
 - All scripts, configs, and documentation in a Git repository
@@ -74,7 +65,6 @@ You are hired as a DevOps Engineer for a startup. Your task is to:
 3. What would you automate further if given more time?
 4. How would you scale this setup for high availability?
 5. How did you document and share your work for team collaboration?
-6. What system hardening steps did you implement and why?
 
 ---
 

@@ -47,3 +47,22 @@ Each day has its own folder with:
 - Attempt the Mega Project at the end to consolidate your learning.
 
 Happy Learning!
+
+---
+
+## Advanced Track (Optional)
+
+These advanced Linux topics extend the core 26-day curriculum. Use them to deepen expertise for senior DevOps, SRE, and Cloud roles. Your original chapters remain unchanged; this is an optional add-on.
+
+| Day  | Topic                                                      |
+|------|------------------------------------------------------------|
+| 27   | [Linux Performance Tuning & Optimization](Day_27/notes_and_exercises.md) (CPU, Memory, I/O, sysctl) |
+| 28   | [Linux Containers & Namespaces Internals](Day_28/notes_and_exercises.md) (namespaces, cgroups, capabilities) |
+| 29   | [Advanced Monitoring & Observability](Day_29/notes_and_exercises.md) (logs, metrics, traces) |
+| 30   | [Advanced Security Hardening & Compliance](Day_30/notes_and_exercises.md) (SELinux/AppArmor, auditd, CIS/STIG) |
+| 31   | [Advanced Troubleshooting & Kernel Interaction](Day_31/notes_and_exercises.md) (strace, perf, eBPF basics) |
+
+Each advanced day includes:
+- Notes focused on production scenarios
+- Hands-on labs and command examples
+- Interview-style questions and answers
