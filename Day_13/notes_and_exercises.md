@@ -1,5 +1,15 @@
 # Day 13: Process Management & Scheduling (cron, at, anacron)
 
+## Learning Objectives
+By the end of Day 13, you will:
+- Master cron for recurring task scheduling
+- Use at for one-time job scheduling
+- Understand anacron for periodic tasks
+- Troubleshoot scheduled jobs
+- Implement automated system maintenance
+
+**Estimated Time:** 3-4 hours
+
 ## Notes
 - **Why Scheduling Matters:**
   - Automates repetitive tasks, backups, monitoring, and maintenance.
@@ -30,26 +40,39 @@
   - Test jobs manually before scheduling
   - Document scheduled tasks
 
-- **Diagram:**
-  - ![Cron Diagram](https://upload.wikimedia.org/wikipedia/commons/6/6b/Cron_table.png)
 
-## In-Depth Explanations & Scenarios
-- **Cron Syntax Deep Dive:**
-  - Format: `min hour day month weekday command`
-  - Special strings: `@reboot`, `@daily`, `@hourly`, `@weekly`, `@monthly`, `@yearly`
-- **Environment in Cron:**
-  - Cron jobs run with minimal environment. Always use full paths for commands and files.
-- **Real-World Example:**
-  - Schedule log rotation, database dumps, or system updates with cron.
-- **at vs. cron vs. anacron:**
-  - `at` for one-time jobs (e.g., shutdown at 2am), `cron` for recurring, `anacron` for periodic jobs on laptops/desktops.
-- **Monitoring & Troubleshooting:**
-  - Check `/var/log/cron` or `/var/log/syslog` for job output/errors.
-  - Use `MAILTO` in crontab to get job results by email.
-- **Best Practices (Expanded):**
-  - Use lock files or `flock` to prevent overlapping jobs.
-  - Document all scheduled jobs in version control.
-  - Test scripts interactively before scheduling.
+
+- **Cron Syntax Examples:**
+  ```bash
+  # Format: min hour day month weekday command
+  0 2 * * * /backup.sh              # Daily at 2 AM
+  */15 * * * * /check.sh            # Every 15 minutes
+  0 0 * * 0 /weekly.sh              # Weekly on Sunday
+  0 9-17 * * 1-5 /business.sh       # Business hours weekdays
+  
+  # Special strings
+  @reboot /startup.sh               # At boot
+  @daily /daily.sh                  # Once per day
+  @hourly /hourly.sh                # Once per hour
+  ```
+
+- **Process Management Commands:**
+  ```bash
+  # View processes
+  ps aux | grep process_name
+  pgrep -f process_name
+  top -p PID
+  
+  # Control processes
+  kill PID
+  kill -9 PID                       # Force kill
+  killall process_name
+  pkill -f pattern
+  
+  # Process priority
+  nice -n 10 command                # Start with lower priority
+  renice 5 -p PID                   # Change priority
+  ```
 
 ## Sample Exercises
 1. Schedule a script to run every day at midnight using cron.
@@ -59,11 +82,36 @@
 5. Redirect cron job output to a log file.
 
 ## Solutions
-1. `crontab -e` and add: `0 0 * * * /path/to/script.sh`
-2. `echo "/path/to/script.sh" | at now + 10 minutes`
-3. `crontab -l`
-4. Edit `/etc/anacrontab` and add: `1 5 myjob /path/to/script.sh`
-5. `0 0 * * * /path/to/script.sh > /var/log/script.log 2>&1`
+1. **Daily cron job:**
+   ```bash
+   crontab -e
+   # Add: 0 0 * * * /path/to/script.sh
+   ```
+
+2. **One-time at job:**
+   ```bash
+   echo "/path/to/script.sh" | at now + 10 minutes
+   at 14:30 tomorrow
+   /path/to/script.sh
+   Ctrl+D
+   ```
+
+3. **List cron jobs:**
+   ```bash
+   crontab -l
+   sudo crontab -l -u username
+   ```
+
+4. **Anacron job:**
+   ```bash
+   sudo vim /etc/anacrontab
+   # Add: 1 5 myjob /path/to/script.sh
+   ```
+
+5. **Cron with logging:**
+   ```bash
+   0 0 * * * /path/to/script.sh > /var/log/script.log 2>&1
+   ```
 
 ## Sample Interview Questions
 1. What is the difference between cron, at, and anacron?
@@ -78,13 +126,43 @@
 10. How do you schedule a job to run only once?
 
 ## Interview Question Answers
-1. `cron` schedules recurring jobs, `at` schedules one-time jobs, `anacron` runs periodic jobs that may be missed.
-2. Use `crontab -e` to edit, `crontab -l` to list jobs for the current user.
-3. `* * * * * command` (min, hour, day, month, weekday).
-4. `0 5 * * 1 command` runs every Monday at 5am.
-5. Add `> /path/to/log 2>&1` to the cron job line.
-6. Scripts as root can be dangerous; restrict permissions and validate scripts.
-7. Use lock files or tools like `flock` to prevent overlap.
-8. Check cron logs (`/var/log/cron`), permissions, and script paths.
-9. System-wide jobs: `/etc/crontab`, `/etc/cron.d/`, `/etc/cron.daily/`, etc.
-10. Use `at` for one-time jobs.
+1. **Scheduling Tools:** cron (recurring), at (one-time), anacron (periodic, handles missed jobs)
+2. **Cron Management:** `crontab -e` to edit, `crontab -l` to list current user's jobs
+3. **Crontab Format:** `min hour day month weekday command` (0-59 0-23 1-31 1-12 0-7)
+4. **Weekly Schedule:** `0 5 * * 1 command` (Monday=1, Sunday=0 or 7)
+5. **Output Redirect:** Add `> /path/to/log 2>&1` to capture stdout and stderr
+6. **Root Risks:** Full system access, validate scripts, use least privilege, audit regularly
+7. **Prevent Overlap:** Use flock, lock files, or check if process already running
+8. **Troubleshooting:** Check logs (/var/log/cron), permissions, paths, environment variables
+9. **System Jobs:** /etc/crontab, /etc/cron.d/, /etc/cron.{daily,weekly,monthly}/
+10. **One-time Jobs:** Use `at` command for single execution
+
+## Completion Checklist
+- [ ] Can create and manage cron jobs
+- [ ] Understand crontab syntax and timing
+- [ ] Know how to use at for one-time scheduling
+- [ ] Can troubleshoot failed scheduled jobs
+- [ ] Understand process management commands
+- [ ] Can prevent job overlap and conflicts
+
+## Key Commands Summary
+```bash
+# Cron management
+crontab -e                       # Edit user crontab
+crontab -l                       # List cron jobs
+crontab -r                       # Remove all cron jobs
+
+# At scheduling
+at 14:30                         # Schedule for 2:30 PM
+at now + 1 hour                  # Schedule relative time
+atq                              # List at jobs
+atrm job_number                  # Remove at job
+
+# Process control
+ps aux | grep process
+kill PID
+killall process_name
+```
+
+## Next Steps
+Proceed to [Day 14: System Monitoring & Log Management](../Day_14/notes_and_exercises.md) to learn system observability.

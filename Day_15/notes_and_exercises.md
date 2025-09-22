@@ -1,5 +1,15 @@
 # Day 15: Networking & Troubleshooting
 
+## Learning Objectives
+By the end of Day 15, you will:
+- Configure and troubleshoot network interfaces
+- Use network diagnostic tools effectively
+- Understand TCP/IP fundamentals
+- Secure network services
+- Resolve connectivity issues
+
+**Estimated Time:** 4-5 hours
+
 ## Notes
 - **Why Networking Skills Matter:**
   - Networking is foundational for system connectivity, troubleshooting, and security.
@@ -30,28 +40,32 @@
   - Monitor network traffic for anomalies
   - Use strong passwords and encryption for remote access
 
-- **Diagram:**
-  - ![Networking Diagram](https://upload.wikimedia.org/wikipedia/commons/3/3b/Network_troubleshooting.png)
 
-## In-Depth Explanations & Scenarios
-- **Network Layers & Protocols:**
-  - OSI model: Physical, Data Link, Network, Transport, Session, Presentation, Application
-  - TCP/IP stack: Link, Internet, Transport, Application
-- **Common Protocols:**
-  - TCP, UDP, ICMP, HTTP, HTTPS, FTP, SSH, DNS, DHCP
-- **Real-World Example:**
-  - Troubleshoot a web server: check interface, ping, traceroute, check firewall, test with `curl`, review logs.
-- **Firewall Tools:**
-  - `iptables`, `ufw`, `firewalld` for managing access
-  - Example: `ufw allow 22/tcp`; `iptables -L -n`
-- **Network Diagnostics:**
-  - Use `tcpdump` or `wireshark` for packet capture and analysis
-  - `nmap` for port scanning and security auditing
-- **Best Practices (Expanded):**
-  - Document all network changes
-  - Use VLANs and segmentation for security
-  - Regularly audit open ports and firewall rules
-  - Use VPNs for secure remote access
+
+- **Advanced Network Commands:**
+  ```bash
+  # Interface management
+  ip link show                     # Show interfaces
+  ip addr add 192.168.1.10/24 dev eth0  # Add IP
+  ip route add default via 192.168.1.1   # Add route
+  
+  # Network diagnostics
+  mtr google.com                   # Continuous traceroute
+  tcpdump -i eth0 port 80         # Packet capture
+  nmap -sS -O target              # Port scan with OS detection
+  
+  # DNS troubleshooting
+  dig @8.8.8.8 example.com        # Query specific DNS server
+  host -t MX example.com          # Mail exchange records
+  ```
+
+- **Network Troubleshooting Methodology:**
+  1. **Physical Layer:** Check cables, interface status
+  2. **Network Layer:** Test IP connectivity with ping
+  3. **Transport Layer:** Check port accessibility
+  4. **Application Layer:** Test service functionality
+  5. **DNS Resolution:** Verify name resolution
+  6. **Firewall Rules:** Check filtering rules
 
 ## Sample Exercises
 1. Display all network interfaces and their IP addresses.
@@ -61,11 +75,39 @@
 5. Transfer a file to another machine using `scp`.
 
 ## Solutions
-1. `ip a` or `ifconfig`
-2. `ping example.com`; `traceroute example.com`
-3. `netstat -tuln` or `ss -tuln`
-4. `nslookup example.com` or `dig example.com`
-5. `scp file.txt user@host:/path/`
+1. **Network interfaces:**
+   ```bash
+   ip a                             # Modern command
+   ifconfig                         # Legacy command
+   ip link show                     # Interface status
+   ```
+
+2. **Connectivity testing:**
+   ```bash
+   ping -c 4 google.com            # Test connectivity
+   traceroute google.com           # Trace route
+   mtr google.com                  # Continuous trace
+   ```
+
+3. **Port listing:**
+   ```bash
+   ss -tuln                        # Modern command
+   netstat -tuln                   # Legacy command
+   lsof -i :80                     # Process using port 80
+   ```
+
+4. **DNS queries:**
+   ```bash
+   dig example.com                 # Detailed DNS info
+   nslookup example.com            # Simple lookup
+   host example.com                # Basic lookup
+   ```
+
+5. **File transfer:**
+   ```bash
+   scp file.txt user@host:/path/
+   rsync -av file.txt user@host:/path/
+   ```
 
 ## Sample Interview Questions
 1. How do you check network interface configuration?
@@ -80,13 +122,45 @@
 10. How do you transfer files securely between servers?
 
 ## Interview Question Answers
-1. Use `ip a` or `ifconfig` to view interface configs.
-2. Use `ping`, `traceroute`, and check logs/firewall rules for troubleshooting.
-3. TCP is connection-oriented and reliable; UDP is connectionless and faster but less reliable.
-4. Use `netstat -tulnp` or `ss -tulnp` to see processes and ports.
-5. Use `nslookup` or `dig` for DNS lookups.
-6. Use SSH with key-based auth, disable root login, and use firewalls.
-7. The routing table determines how packets are forwarded between networks.
-8. Use `iftop`, `nload`, `tcpdump`, or `wireshark` to monitor traffic.
-9. Check `/etc/resolv.conf`, test with `dig`, and verify DNS server reachability.
-10. Use `scp` or `rsync` over SSH for secure file transfer.
+1. **Interface Config:** `ip a` or `ifconfig` shows IP addresses, status, and interface details
+2. **Connectivity Troubleshooting:** Use ping, traceroute, check firewall rules, verify DNS, test ports
+3. **TCP vs UDP:** TCP is reliable, connection-oriented; UDP is fast, connectionless, no guarantees
+4. **Port Process Mapping:** `ss -tulnp` or `netstat -tulnp` shows which process uses which port
+5. **DNS Lookup:** `dig domain.com` or `nslookup domain.com` for DNS resolution
+6. **Secure Remote Access:** SSH keys, disable password auth, firewall rules, fail2ban, non-standard ports
+7. **Routing Table:** Determines packet forwarding paths between networks, view with `ip route`
+8. **Traffic Monitoring:** iftop, nload, tcpdump, wireshark, netstat for network analysis
+9. **DNS Troubleshooting:** Check /etc/resolv.conf, test with dig, verify DNS server connectivity
+10. **Secure File Transfer:** scp, sftp, rsync over SSH for encrypted file transfers
+
+## Completion Checklist
+- [ ] Can configure network interfaces
+- [ ] Know how to troubleshoot connectivity issues
+- [ ] Understand TCP/IP protocol basics
+- [ ] Can use network diagnostic tools
+- [ ] Know how to secure network services
+- [ ] Can analyze network traffic
+
+## Key Commands Summary
+```bash
+# Network configuration
+ip a                             # Show interfaces
+ip route                         # Show routing table
+
+# Connectivity testing
+ping host                        # Test connectivity
+traceroute host                  # Trace route
+mtr host                         # Continuous trace
+
+# Port and service analysis
+ss -tuln                         # Show listening ports
+lsof -i :port                    # Process using port
+nmap host                        # Port scan
+
+# DNS resolution
+dig domain.com                   # DNS lookup
+host domain.com                  # Simple lookup
+```
+
+## Next Steps
+Proceed to [Day 16: Security, Firewalls & Hardening](../Day_16/notes_and_exercises.md) to learn system security.

@@ -1,11 +1,21 @@
 # Day 03: Linux Folder Structure & File Types
 
+## Learning Objectives
+By the end of Day 3, you will:
+- Understand the Linux filesystem hierarchy (FHS)
+- Navigate the filesystem using absolute and relative paths
+- Identify different file types in Linux
+- Create and manage symbolic and hard links
+- Understand the purpose of key directories
+
+**Estimated Time:** 2-3 hours
+
 ## Notes
 - **Linux Filesystem Hierarchy**
   - The Linux filesystem is hierarchical, starting from the root directory `/`.
   - Each directory has a specific purpose and is standardized by the Filesystem Hierarchy Standard (FHS).
 
-  ![Linux Filesystem Hierarchy](https://upload.wikimedia.org/wikipedia/commons/6/6f/FHS-standards.png)
+
 
 - **Key Directories (Categorized):**
   - **Essential System Directories:**
@@ -86,9 +96,16 @@
   ```
 
 - **Commands to Identify File Types:**
-  - `ls -l`: Shows file type in the first character (-, d, l, c, b, p, s)
-  - `file <filename>`: Describes file type
-  - `stat <filename>`: Detailed file info
+  - `ls -l`: Shows file type in first character:
+    - `-` Regular file
+    - `d` Directory
+    - `l` Symbolic link
+    - `c` Character device
+    - `b` Block device
+    - `p` Named pipe (FIFO)
+    - `s` Socket
+  - `file <filename>`: Describes file content type
+  - `stat <filename>`: Detailed file metadata including inode
 
 - **Navigating the Filesystem:**
   - `cd <dir>`: Change directory
@@ -118,6 +135,83 @@
 6. Use `file` and `stat` to inspect different file types.
 7. Explain the difference between symbolic and hard links, and give practical use cases for each.
 
+
+
+## Solutions
+1. **Root directory contents:**
+   ```bash
+   ls -l /
+   ```
+   - `/bin` - Essential binaries (ls, cp, mv)
+   - `/etc` - Configuration files
+   - `/home` - User directories
+   - `/var` - Variable data (logs, mail)
+   - `/usr` - User programs and libraries
+   - `/tmp` - Temporary files
+
+2. **Visualize directory structure:**
+   ```bash
+   tree ~          # Home directory
+   tree -L 2 /     # Root with 2 levels
+   ```
+
+3. **Find hidden files:**
+   ```bash
+   ls -la ~                    # List all including hidden
+   find ~ -name ".*" -type f   # Find hidden files
+   ```
+
+4. **System files comparison:**
+   - `/etc/passwd` - User account information (username, UID, home directory)
+   - `/etc/shadow` - Encrypted passwords and password policies
+
+5. **Links demonstration:**
+   ```bash
+   echo "Hello World" > original.txt
+   ln -s original.txt symlink.txt     # Symbolic link
+   ln original.txt hardlink.txt       # Hard link
+   ls -li *.txt                       # Compare inodes
+   ```
+
+6. **File type inspection:**
+   ```bash
+   file /bin/ls        # Binary executable
+   file /etc/passwd    # ASCII text
+   file /dev/sda       # Block device
+   stat original.txt   # Detailed file info
+   ```
+
+7. **Link differences:**
+   - **Symbolic links:** Point to file path, can cross filesystems, break if target deleted
+   - **Hard links:** Point to same inode, same filesystem only, file persists until all links removed
+
+## Completion Checklist
+- [ ] Can navigate filesystem using cd, ls, pwd
+- [ ] Understand purpose of major directories (/bin, /etc, /home, /var, /usr)
+- [ ] Can identify file types using ls -l and file command
+- [ ] Created both symbolic and hard links
+- [ ] Understand difference between absolute and relative paths
+- [ ] Can find and work with hidden files
+
+## Key Commands Summary
+```bash
+# Navigation
+cd /path/to/directory    # Change directory
+ls -la                   # List all files with details
+pwd                      # Print working directory
+tree                     # Show directory structure
+
+# File types
+file filename           # Identify file type
+stat filename          # Detailed file information
+ls -li                 # Show inodes
+
+# Links
+ln -s target linkname  # Create symbolic link
+ln target linkname     # Create hard link
+readlink linkname      # Show link target
+```
+
 ## Sample Interview Questions
 1. Explain the Linux filesystem hierarchy and the purpose of key directories.
 2. What is the difference between /bin and /usr/bin?
@@ -131,22 +225,16 @@
 10. How would you troubleshoot a broken symlink?
 
 ## Interview Question Answers
-1. The Linux filesystem hierarchy starts at `/` and organizes files by function: `/bin` for binaries, `/etc` for configs, `/home` for user data, `/var` for variable data, etc.
-2. `/bin` contains essential binaries for all users; `/usr/bin` has non-essential user binaries, often for applications installed after the base system.
-3. File types: regular files, directories, symlinks, hard links, device files, pipes, sockets. Identify with `ls -l`, `file`, or `stat`.
-4. Symbolic links point to a path and can cross filesystems; hard links are additional directory entries for the same inode. Use symlinks for configs/scripts, hard links for backup/versioning.
-5. Use `ls -a` to list all files, then filter with `grep '^\.'` for hidden files.
-6. `/proc` provides process and kernel info; `/sys` exposes kernel and hardware info for system management.
-7. Use `ls -li` or `stat` to check inode numbers; inodes track file metadata and are key for hard links.
-8. Device files represent hardware and are found in `/dev` (e.g., `/dev/sda` for disks).
-9. Absolute paths start with `/` and are system-wide; relative paths are based on the current directory.
-10. Use `ls -l` to check if a symlink is broken (shows red or 'No such file'); fix by recreating or correcting the target.
+1. **Filesystem Hierarchy:** Starts at `/` with standardized directories: `/bin` (binaries), `/etc` (configs), `/home` (users), `/var` (variable data)
+2. **bin vs usr/bin:** `/bin` contains essential system binaries; `/usr/bin` has user applications and non-essential binaries
+3. **File Types:** Regular files (-), directories (d), symlinks (l), device files (c/b), pipes (p), sockets (s). Use `ls -l` or `file` command
+4. **Links:** Symlinks point to file paths, can cross filesystems; hard links share same inode, same filesystem only
+5. **Hidden Files:** Use `ls -a` or `find . -name ".*"` to show files starting with dot
+6. **Virtual Filesystems:** `/proc` shows process/kernel info; `/sys` exposes kernel and hardware information
+7. **Inodes:** Use `ls -i` or `stat`; inodes store file metadata and are crucial for hard links and file system operations
+8. **Device Files:** Located in `/dev`, represent hardware devices (e.g., `/dev/sda` for disks, `/dev/tty` for terminals)
+9. **Paths:** Absolute paths start with `/` (full path); relative paths are based on current directory
+10. **Broken Symlinks:** Use `ls -l` to identify (shows target), `find -L` to locate, recreate or fix target path
 
-## Solutions
-1. `ls -l /` ; see notes for directory purposes and categories
-2. `tree ~`
-3. `ls -a ~ | grep '^\.'`
-4. `/etc/passwd` stores user account info; `/etc/shadow` stores encrypted passwords.
-5. `ln -s file.txt symlink.txt` (symbolic); `ln file.txt hardlink.txt` (hard); use `ls -li` to see inode numbers.
-6. `file file.txt` ; `stat file.txt` ; try on directories, links, devices, etc.
-7. Symbolic links point to a file or directory path and can cross filesystems; hard links are additional directory entries for the same inode and cannot cross filesystems. Use symlinks for configs/scripts, hard links for backup/versioning.
+## Next Steps
+Proceed to [Day 4: Linux Boot Process & Service Management](../Day_04/notes_and_exercises.md) to learn how Linux starts up and manages services.

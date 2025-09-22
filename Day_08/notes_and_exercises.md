@@ -1,100 +1,217 @@
-# Day 08: Linux Process Management (ps, top, kill, nice, jobs, etc.)
+# Day 08: File Management & Editors (nano, vi/vim)
+
+## Learning Objectives
+By the end of Day 8, you will:
+- Master advanced file operations and management
+- Use nano for simple text editing
+- Understand vi/vim basics for system administration
+- Manage file attributes and metadata
+- Apply file compression and archiving techniques
+
+**Estimated Time:** 3-4 hours
 
 ## Notes
-- **Why Process Management Matters:**
-  - Managing processes is essential for system stability, troubleshooting, and performance tuning.
-  - Understanding process states, priorities, and signals is key for DevOps and SRE roles.
+- **Why File Management & Editors Matter:**
+  - Essential for configuration management, log analysis, and system administration
+  - Text editors are crucial for editing config files, scripts, and documentation
+  - Understanding file attributes helps with troubleshooting and security
 
-- **Process Concepts:**
-  - Every running program is a process with a unique PID (Process ID).
-  - Parent/child relationships: processes can spawn other processes.
-  - Foreground vs. background processes; interactive vs. daemon processes.
+- **Advanced File Operations:**
+  ```bash
+  # File attributes
+  stat filename                    # Detailed file information
+  file filename                    # Determine file type
+  wc filename                      # Word, line, character count
+  wc -l filename                   # Line count only
+  
+  # File comparison
+  diff file1 file2                 # Show differences
+  diff -u file1 file2              # Unified diff format
+  cmp file1 file2                  # Binary comparison
+  
+  # File timestamps
+  touch -t 202301011200 file       # Set specific timestamp
+  touch -r reference_file file     # Copy timestamp from reference
+  ```
 
-- **Viewing Processes:**
-  - `ps aux` — List all processes with details (user, PID, CPU, MEM, command)
-  - `ps -ef` — Alternative format
-  - `pgrep <pattern>` — Find PIDs by name
-  - `pstree` — Visualize process hierarchy
-  - `top` — Real-time process monitor (press `h` for help)
-    - `htop` — Enhanced, interactive version (if installed)
+- **nano Editor (Beginner-Friendly):**
+  ```bash
+  nano filename                    # Open file in nano
+  
+  # Key shortcuts (shown at bottom)
+  Ctrl+O                          # Save (WriteOut)
+  Ctrl+X                          # Exit
+  Ctrl+W                          # Search (Where Is)
+  Ctrl+\                          # Search and replace
+  Ctrl+K                          # Cut line
+  Ctrl+U                          # Paste (UnCut)
+  Ctrl+G                          # Help
+  ```
 
-- **Controlling Processes:**
-  - `kill <PID>` — Send signal to process (default: SIGTERM)
-  - `kill -9 <PID>` — Force kill (SIGKILL)
-  - `pkill <pattern>` — Kill by name
-  - `killall <name>` — Kill all by name
-  - `xkill` — Click to kill a GUI process
+- **vi/vim Editor (Advanced):**
+  ```bash
+  vi filename                      # Open file in vi
+  vim filename                     # Open file in vim (enhanced vi)
+  
+  # Modes
+  # Normal mode (default) - navigation and commands
+  # Insert mode - text editing
+  # Command mode - save, quit, search
+  
+  # Mode switching
+  i                               # Enter insert mode
+  Esc                             # Return to normal mode
+  :                               # Enter command mode
+  
+  # Navigation (Normal mode)
+  h, j, k, l                      # Left, down, up, right
+  w, b                            # Next/previous word
+  0, $                            # Beginning/end of line
+  gg, G                           # First/last line
+  
+  # Editing (Normal mode)
+  x                               # Delete character
+  dd                              # Delete line
+  yy                              # Copy line
+  p                               # Paste
+  u                               # Undo
+  Ctrl+r                          # Redo
+  
+  # Command mode
+  :w                              # Save
+  :q                              # Quit
+  :wq or :x                       # Save and quit
+  :q!                             # Quit without saving
+  /pattern                        # Search forward
+  ?pattern                        # Search backward
+  :%s/old/new/g                   # Replace all occurrences
+  ```
 
-- **Process Priorities:**
-  - `nice -n <value> <command>` — Start with priority (lower value = higher priority, range: -20 to 19)
-  - `renice <value> -p <PID>` — Change priority of running process
-
-- **Background & Job Control:**
-  - `&` — Run command in background: `sleep 60 &`
-  - `jobs` — List background jobs
-  - `fg %1` — Bring job to foreground
-  - `bg %1` — Resume job in background
-  - `Ctrl+Z` — Suspend foreground job
-  - `disown` — Remove job from shell's job table
-
-- **Signals:**
-  - `kill -l` — List all signals
-  - Common: SIGTERM (15), SIGKILL (9), SIGHUP (1), SIGSTOP (19), SIGCONT (18)
-
-- **Monitoring & Debugging:**
-  - `strace -p <PID>` — Trace system calls
-  - `lsof -p <PID>` — List open files by process
-  - `ps -o pid,ppid,cmd,%mem,%cpu -p <PID>` — Custom output
-
-- **Best Practices:**
-  - Avoid using `kill -9` unless necessary (no cleanup)
-  - Monitor resource usage with `top`/`htop` for troubleshooting
-  - Use job control for long-running or background tasks
-  - Regularly audit running processes for security
-
-- **Diagram:**
-  - ![Process Tree Diagram](https://upload.wikimedia.org/wikipedia/commons/6/6e/Process_tree.png)
+- **File Attributes and Metadata:**
+  ```bash
+  # Extended attributes
+  lsattr filename                  # List attributes
+  chattr +i filename               # Make immutable
+  chattr -i filename               # Remove immutable
+  
+  # File ACLs (Access Control Lists)
+  getfacl filename                 # Get ACL
+  setfacl -m u:user:rw filename    # Set user permissions
+  ```
 
 ## Sample Exercises
-1. List all processes for a specific user.
-2. Start a process in the background and bring it to the foreground.
-3. Find and kill all processes named `python`.
-4. Change the priority of a running process.
-5. Display a process tree for the system.
-6. Monitor CPU and memory usage of processes in real time.
-7. Suspend a process and then resume it in the background.
-8. List all open files for a given process.
+1. Create a file using nano, add content, and save it.
+2. Open a file in vim, navigate to a specific line, and make edits.
+3. Compare two similar files and identify differences.
+4. Use vim to search and replace text in a configuration file.
+5. Set file attributes to make a file immutable.
+6. Count lines, words, and characters in a text file.
+7. Create a backup of a file with timestamp.
+8. Use vim to edit multiple files simultaneously.
 
 ## Sample Interview Questions
-1. What is the difference between `kill` and `kill -9`?
-2. How do you change the priority of a running process?
-3. What is the purpose of the `jobs`, `fg`, and `bg` commands?
-4. How do you find the parent process of a given PID?
-5. What is the difference between `ps aux` and `top`?
-6. How do you monitor all processes started by a specific user?
-7. What is a zombie process and how do you handle it?
-8. How do you list all signals that can be sent to a process?
-9. What is the effect of `disown`?
-10. How do you debug a misbehaving process?
+1. What is the difference between nano and vim?
+2. How do you save and exit in vim?
+3. What are the different modes in vim?
+4. How do you search and replace text in vim?
+5. What is the purpose of the `stat` command?
+6. How do you make a file immutable in Linux?
+7. What is the difference between `diff` and `cmp`?
+8. How do you count lines in a file?
+9. How do you copy timestamps from one file to another?
+10. What are file ACLs and how do you manage them?
 
 ## Solutions
-1. `ps -u username` — Lists all processes for a specific user.
-2. `sleep 100 &`, then `fg %1` — Starts a process in the background and brings it to the foreground.
-3. `pkill python` or `killall python` — Finds and kills all processes named `python`.
-4. `renice -n 5 -p <PID>` — Changes the priority of a running process.
-5. `pstree` or `ps -ejH` — Displays a process tree for the system.
-6. `top` or `htop` — Monitors CPU and memory usage of processes in real time.
-7. `Ctrl+Z`, then `bg %1` — Suspends a process and resumes it in the background.
-8. `lsof -p <PID>` — Lists all open files for a given process.
+1. **Create file with nano:**
+   ```bash
+   nano myfile.txt
+   # Type content, Ctrl+O to save, Ctrl+X to exit
+   ```
+
+2. **Edit with vim:**
+   ```bash
+   vim filename
+   :10                             # Go to line 10
+   i                               # Enter insert mode
+   # Make edits
+   Esc                             # Exit insert mode
+   :wq                             # Save and quit
+   ```
+
+3. **Compare files:**
+   ```bash
+   diff file1.txt file2.txt
+   diff -u file1.txt file2.txt     # Unified format
+   ```
+
+4. **Search and replace in vim:**
+   ```bash
+   vim config.conf
+   :%s/old_value/new_value/g       # Replace all occurrences
+   :wq                             # Save and quit
+   ```
+
+5. **Make file immutable:**
+   ```bash
+   sudo chattr +i important.conf
+   lsattr important.conf           # Verify attribute
+   ```
+
+6. **Count file content:**
+   ```bash
+   wc filename                     # Lines, words, characters
+   wc -l filename                  # Lines only
+   ```
+
+7. **Backup with timestamp:**
+   ```bash
+   cp file.txt file.txt.$(date +%Y%m%d_%H%M%S)
+   ```
+
+8. **Edit multiple files in vim:**
+   ```bash
+   vim file1.txt file2.txt
+   :next                           # Switch to next file
+   :prev                           # Switch to previous file
+   ```
 
 ## Interview Question Answers
-1. `kill` sends a signal (default SIGTERM) allowing cleanup; `kill -9` (SIGKILL) forcefully terminates without cleanup.
-2. Use `renice -n <value> -p <PID>` to change the priority of a running process.
-3. `jobs` lists background jobs; `fg` brings a job to the foreground; `bg` resumes a suspended job in the background.
-4. Use `ps -o ppid= -p <PID>` or `ps -fp <PID>` to find the parent process.
-5. `ps aux` is a snapshot of all processes; `top` is a real-time, interactive process monitor.
-6. `ps -u <username>` or `pgrep -u <username>` to monitor all processes started by a user.
-7. A zombie process is a completed process not yet reaped by its parent; handled by killing/restarting the parent or using `wait`.
-8. `kill -l` lists all signals that can be sent to a process.
-9. `disown` removes a job from the shell's job table, so it won't be affected by shell exit.
-10. Use `strace`, `lsof`, `top`, logs, and check resource usage to debug a misbehaving process.
+1. **nano vs vim:** nano is beginner-friendly with on-screen help; vim is powerful but has steeper learning curve
+2. **vim Save/Exit:** `:w` saves, `:q` quits, `:wq` saves and quits, `:q!` quits without saving
+3. **vim Modes:** Normal (navigation/commands), Insert (text editing), Command (save/search/quit)
+4. **vim Search/Replace:** `:%s/old/new/g` replaces all occurrences globally
+5. **stat Command:** Shows detailed file information including size, permissions, timestamps, inode
+6. **Immutable Files:** Use `chattr +i filename` to make file unchangeable, even by root
+7. **diff vs cmp:** `diff` shows line-by-line differences in text files; `cmp` compares files byte-by-byte
+8. **Count Lines:** `wc -l filename` or `cat filename | wc -l`
+9. **Copy Timestamps:** `touch -r source_file target_file` copies timestamps
+10. **File ACLs:** Extended permissions beyond standard rwx; managed with `getfacl` and `setfacl`
+
+## Completion Checklist
+- [ ] Can create and edit files using nano
+- [ ] Understand basic vim navigation and editing
+- [ ] Know how to save and exit both editors
+- [ ] Can compare files and identify differences
+- [ ] Understand file attributes and metadata
+- [ ] Can use search and replace in text editors
+
+## Key Commands Summary
+```bash
+# nano editor
+nano filename                    # Open file
+Ctrl+O, Ctrl+X                  # Save, exit
+
+# vim editor
+vim filename                     # Open file
+i, Esc                          # Insert mode, normal mode
+:w, :q, :wq                     # Save, quit, save & quit
+
+# File operations
+stat filename                    # File information
+diff file1 file2                 # Compare files
+wc -l filename                   # Count lines
+touch -r ref_file target         # Copy timestamp
+```
+
+## Next Steps
+Proceed to [Day 9: File Transfer](../Day_09/notes_and_exercises.md) to learn secure file transfer methods.

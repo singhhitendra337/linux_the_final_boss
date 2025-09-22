@@ -1,4 +1,14 @@
-# Day 07: Users, Groups & Permissions (Advanced)
+# Day 07: Users, Groups & Permissions
+
+## Learning Objectives
+By the end of Day 7, you will:
+- Understand Linux user and group concepts
+- Create, modify, and delete users and groups
+- Manage file ownership and permissions
+- Configure special permissions (SUID, SGID, Sticky Bit)
+- Apply security best practices for user management
+
+**Estimated Time:** 3-4 hours
 
 ## Notes
 - **Why User & Group Management Matters:**
@@ -63,8 +73,7 @@
   - Remove unused users/groups promptly
   - Never use 777 permissions on sensitive files
 
-- **Diagram:**
-  - ![User/Group/Permission Diagram](https://upload.wikimedia.org/wikipedia/commons/6/6a/Unix_file_permissions_reference.png)
+
 
 ## Sample Exercises
 1. Create a user `devops1` with home directory and bash shell, set a password, and add to `sudo` and `docker` groups.
@@ -75,6 +84,125 @@
 6. List all users with UID >= 1000.
 7. Remove a user and their home directory.
 8. Change ownership and permissions of a file so only a specific group can read/write it.
+
+
+
+## Solutions
+1. **Create user with groups:**
+   ```bash
+   sudo adduser devops1                        # Interactive creation
+   # OR
+   sudo useradd -m -s /bin/bash devops1        # Command-line creation
+   sudo passwd devops1                         # Set password
+   sudo usermod -aG sudo,docker devops1       # Add to groups
+   ```
+
+2. **Create group and add users:**
+   ```bash
+   sudo groupadd projectX                      # Create group
+   sudo usermod -aG projectX user1             # Add user1
+   sudo usermod -aG projectX user2             # Add user2
+   getent group projectX                       # Verify members
+   ```
+
+3. **Change user shell:**
+   ```bash
+   sudo usermod -s /bin/zsh username
+   chsh -s /bin/zsh username                   # Alternative method
+   ```
+
+4. **Lock and unlock account:**
+   ```bash
+   sudo usermod -L username                    # Lock account
+   sudo passwd -l username                     # Lock password only
+   sudo usermod -U username                    # Unlock account
+   sudo passwd -u username                     # Unlock password
+   ```
+
+5. **Special permissions:**
+   ```bash
+   chmod u+s testfile                          # Set SUID
+   chmod g+s testdir                           # Set SGID
+   chmod +t testdir                            # Set Sticky Bit
+   ls -l testfile testdir                      # Verify permissions
+   ```
+
+6. **List users with UID >= 1000:**
+   ```bash
+   awk -F: '$3>=1000{print $1, $3}' /etc/passwd
+   getent passwd | awk -F: '$3>=1000{print $1}'
+   ```
+
+7. **Remove user and home directory:**
+   ```bash
+   sudo userdel -r username                    # Remove user and home
+   sudo deluser --remove-home username         # Alternative
+   ```
+
+8. **Set group ownership and permissions:**
+   ```bash
+   sudo chown :groupname filename              # Change group only
+   chmod 660 filename                          # rw-rw----
+   chmod g+w filename                          # Add group write
+   ```
+
+## Completion Checklist
+- [ ] Understand UID/GID concepts and system vs regular users
+- [ ] Can create, modify, and delete users and groups
+- [ ] Know the difference between primary and secondary groups
+- [ ] Understand file ownership and permission models
+- [ ] Can set and identify special permissions (SUID, SGID, Sticky)
+- [ ] Familiar with user account security practices
+
+## Key Commands Summary
+```bash
+# User management
+sudo adduser username               # Create user (interactive)
+sudo useradd -m -s /bin/bash user  # Create user (command-line)
+sudo passwd username               # Set password
+sudo usermod -aG group username    # Add to group
+sudo userdel -r username           # Delete user and home
+
+# Group management
+sudo groupadd groupname            # Create group
+sudo gpasswd -a user group         # Add user to group
+sudo gpasswd -d user group         # Remove user from group
+
+# Information
+id username                        # Show user/group IDs
+groups username                    # Show user's groups
+getent passwd                      # List all users
+getent group                       # List all groups
+
+# Permissions
+chmod 755 file                     # Set permissions (numeric)
+chmod u+x,g-w file                 # Set permissions (symbolic)
+chown user:group file              # Change ownership
+chgrp group file                   # Change group only
+```
+
+## Permission Reference
+```
+Numeric  Symbolic  Meaning
+4        r         Read
+2        w         Write
+1        x         Execute
+
+Common combinations:
+755 = rwxr-xr-x   (executable files)
+644 = rw-r--r--   (regular files)
+600 = rw-------   (private files)
+777 = rwxrwxrwx   (avoid - security risk)
+```
+
+## Security Best Practices
+- Use strong passwords and enforce password policies
+- Grant minimum necessary permissions
+- Regularly audit user accounts and group memberships
+- Remove unused accounts promptly
+- Use sudo instead of root login
+- Monitor special permissions (SUID/SGID files)
+- Set appropriate umask values
 
 ## Sample Interview Questions
 1. What is the difference between `useradd` and `adduser`?
@@ -100,12 +228,29 @@
 9. Use `cat /etc/passwd` for users, `groups username` for groups.
 10. `usermod -L username` locks, `usermod -U username` unlocks an account.
 
-## Solutions
-1. `adduser devops1` (or `useradd -m -s /bin/bash devops1`), `passwd devops1`, `usermod -aG sudo,docker devops1`
-2. `groupadd projectX`, `usermod -aG projectX user1`, `usermod -aG projectX user2`
-3. `usermod -s /bin/zsh username`
-4. `usermod -L username`, `usermod -U username`
-5. `chmod u+s testfile`, `chmod g+s testdir`, `chmod +t testdir`
-6. `awk -F: '$3>=1000{print $1}' /etc/passwd`
-7. `userdel -r username`
-8. `chown :groupname filename`, `chmod 660 filename`
+## Sample Interview Questions
+1. What is the difference between `useradd` and `adduser`?
+2. How do you add a user to multiple groups at once?
+3. What is the purpose of the `/etc/shadow` file?
+4. How do you enforce password policies for users?
+5. Explain SUID, SGID, and Sticky Bit with real-world examples.
+6. How do you list all members of a group?
+7. What happens if you delete a user but not their files?
+8. How do you switch to another user without knowing their password?
+9. How do you find all files owned by a specific user?
+10. What are the security risks of improper user/group management?
+
+## Interview Question Answers
+1. **useradd vs adduser:** `useradd` is low-level, scriptable; `adduser` is interactive, user-friendly wrapper
+2. **Multiple Groups:** `usermod -aG group1,group2 username` adds user to multiple groups
+3. **/etc/shadow:** Stores encrypted passwords and password policies, readable only by root for security
+4. **Password Policies:** Use PAM modules, `chage` command, `/etc/login.defs` for password aging and complexity
+5. **Special Permissions:** SUID runs as file owner (e.g., `passwd`); SGID inherits group (directories); Sticky bit restricts deletion (`/tmp`)
+6. **Group Members:** `getent group groupname` or `grep groupname /etc/group`
+7. **Orphaned Files:** Files remain but show numeric UID instead of username; can cause security issues
+8. **User Switching:** Use `sudo -u username command` or `sudo su - username` with proper sudo privileges
+9. **Find User Files:** `find / -user username 2>/dev/null` finds all files owned by user
+10. **Security Risks:** Privilege escalation, unauthorized access, orphaned files, weak passwords, excessive permissions
+
+## Next Steps
+Proceed to [Day 8: File Management & Editors](../Day_08/notes_and_exercises.md) to learn advanced file operations and text editors.

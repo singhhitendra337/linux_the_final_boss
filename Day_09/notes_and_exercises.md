@@ -1,4 +1,14 @@
-# Day 09: File Transfer & Remote Access (SSH, SCP, SFTP, rsync, NFS, Samba)
+# Day 09: File Transfer (SCP, SFTP, rsync, FTP, NFS, Samba)
+
+## Learning Objectives
+By the end of Day 9, you will:
+- Master secure file transfer protocols (SCP, SFTP, rsync)
+- Understand network file systems (NFS, Samba)
+- Configure and troubleshoot file sharing services
+- Apply security best practices for file transfers
+- Automate file synchronization tasks
+
+**Estimated Time:** 4-5 hours
 
 ## Notes
 - **Why File Transfer & Remote Access Matter:**
@@ -51,8 +61,7 @@
   - Monitor and audit remote access logs
   - Use strong passwords and encryption
 
-- **Diagram:**
-  - ![File Transfer Diagram](https://upload.wikimedia.org/wikipedia/commons/3/3a/SSH_architecture_diagram.png)
+
 
 ## Sample Exercises
 1. Set up SSH key-based authentication between two machines.
@@ -76,24 +85,111 @@
 9. How do you automate file transfers securely?
 10. What are the advantages of using `rsync` for backups?
 
-## Interview Question Answers
-1. SCP is a simple, non-interactive file transfer; SFTP is interactive and allows more operations.
-2. Generate a key with `ssh-keygen`, then copy with `ssh-copy-id user@host`.
-3. `rsync` syncs files and directories efficiently, only transferring changes; `scp` copies files as-is.
-4. NFS is not encrypted and can be vulnerable; mitigate with firewalls, exports restrictions, and root_squash.
-5. Use `mount -t cifs //server/share /mnt -o user=user` to mount a Samba share.
-6. Edit `/etc/ssh/sshd_config` to set `AllowUsers` or use firewall rules.
-7. `ssh-copy-id` copies your public key to a remote host for passwordless login.
-8. Check SSH logs, use `ssh -v`, and verify network/firewall settings to troubleshoot.
-9. Use `rsync` with SSH, or scripts with key-based auth for secure automation.
-10. `rsync` is fast, incremental, supports resume, and is ideal for backups.
-
 ## Solutions
-1. `ssh-keygen`, then `ssh-copy-id user@host`
-2. `scp -r dir/ user@host:/path/`
-3. `rsync -avz source/ user@host:/dest/`, then check with `rsync -n ...`
-4. `mount -t nfs server:/share /mnt`
-5. `smbclient //server/share -U user` or `mount -t cifs ...`
-6. `sftp user@host`, then `put`/`get`
-7. `rsync -n -avz ...`
-8. Edit `/etc/ssh/sshd_config` (AllowUsers) and restart SSH
+1. **SSH Key Setup:**
+   ```bash
+   ssh-keygen -t rsa -b 4096        # Generate key pair
+   ssh-copy-id user@host            # Copy public key
+   ssh user@host                    # Test passwordless login
+   ```
+
+2. **SCP Directory Transfer:**
+   ```bash
+   scp -r /local/dir user@host:/remote/path/
+   scp -P 2222 -r dir/ user@host:/path/    # Custom port
+   ```
+
+3. **rsync Synchronization:**
+   ```bash
+   rsync -avz --progress source/ user@host:/dest/
+   rsync -n -avz source/ dest/      # Dry run first
+   rsync --delete source/ dest/     # Delete extra files
+   ```
+
+4. **NFS Mount:**
+   ```bash
+   # Server: /etc/exports
+   /shared/data 192.168.1.0/24(rw,sync,no_root_squash)
+   
+   # Client:
+   sudo mount -t nfs server:/shared/data /mnt/nfs
+   ```
+
+5. **Samba Access:**
+   ```bash
+   # Interactive access
+   smbclient //server/share -U username
+   
+   # Mount share
+   sudo mount -t cifs //server/share /mnt/smb -o username=user
+   ```
+
+6. **SFTP Session:**
+   ```bash
+   sftp user@host
+   put localfile.txt               # Upload
+   get remotefile.txt              # Download
+   mput *.txt                      # Upload multiple
+   exit                            # Close session
+   ```
+
+7. **rsync Dry Run:**
+   ```bash
+   rsync -n -avz source/ dest/     # Show what would be transferred
+   rsync -avz source/ dest/        # Actual transfer
+   ```
+
+8. **SSH Access Restriction:**
+   ```bash
+   # Edit /etc/ssh/sshd_config
+   AllowUsers user1 user2
+   DenyUsers baduser
+   sudo systemctl restart sshd
+   ```
+
+## Interview Question Answers
+1. **SCP vs SFTP:** SCP is simple, non-interactive file copy; SFTP is interactive with directory browsing and multiple operations
+2. **Passwordless SSH:** Generate key with `ssh-keygen`, copy with `ssh-copy-id user@host`
+3. **rsync vs scp:** rsync transfers only changes (incremental), supports resume, compression; scp copies entire files
+4. **NFS Security:** Use firewalls, export restrictions, root_squash, NFSv4 with Kerberos for encryption
+5. **Samba Mount:** `mount -t cifs //server/share /mnt -o username=user,password=pass`
+6. **SSH Restrictions:** Edit `/etc/ssh/sshd_config` with AllowUsers, DenyUsers, or use firewall rules
+7. **ssh-copy-id:** Copies your public key to remote host's authorized_keys for passwordless authentication
+8. **SSH Troubleshooting:** Check logs (`/var/log/auth.log`), use `ssh -v` for verbose output, verify network/firewall
+9. **Automated Transfers:** Use rsync with SSH keys, cron jobs, or configuration management tools
+10. **rsync Advantages:** Incremental transfers, bandwidth efficient, resume capability, preserve permissions, ideal for backups
+
+## Completion Checklist
+- [ ] Can transfer files securely using SCP and SFTP
+- [ ] Understand rsync for efficient synchronization
+- [ ] Know how to mount and use NFS shares
+- [ ] Can access Samba/CIFS shares from Linux
+- [ ] Configured SSH key-based authentication
+- [ ] Understand security implications of each method
+
+## Key Commands Summary
+```bash
+# Secure file transfer
+scp file user@host:/path         # Copy file
+sftp user@host                   # Interactive transfer
+rsync -avz source/ dest/         # Synchronize directories
+
+# Network file systems
+mount -t nfs server:/share /mnt  # Mount NFS
+mount -t cifs //server/share /mnt # Mount Samba
+
+# SSH setup
+ssh-keygen                       # Generate key pair
+ssh-copy-id user@host           # Copy public key
+```
+
+## Security Best Practices
+- Use SSH keys instead of passwords
+- Restrict SSH access by user/IP
+- Use firewalls for NFS/Samba
+- Enable encryption where possible
+- Monitor file transfer logs
+- Use least privilege principle
+
+## Next Steps
+Proceed to [Day 10: Environment Variables, Aliases & Shell Customization](../Day_10/notes_and_exercises.md) to customize your shell environment.

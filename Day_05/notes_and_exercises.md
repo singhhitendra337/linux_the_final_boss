@@ -1,5 +1,15 @@
 # Day 05: Basic Linux Commands for DevOps Engineers
 
+## Learning Objectives
+By the end of Day 5, you will:
+- Master essential Linux navigation and file operations
+- Use basic commands for system information and file management
+- Understand command history and tab completion
+- Create aliases for efficiency
+- Apply best practices for safe file operations
+
+**Estimated Time:** 3-4 hours
+
 ## Notes
 - **Why Learn Basic Linux Commands?**
   - Mastery of basic commands is essential for navigation, troubleshooting, and automation in any Linux environment.
@@ -50,6 +60,108 @@
 4. Search for the word "root" in `/etc/passwd` using `grep`.
 5. Create an alias to list files in long format and use it.
 
+
+
+## Solutions
+1. **List all files including hidden:**
+   ```bash
+   ls -la ~
+   ls -a ~/    # Alternative
+   ```
+
+2. **File and directory operations:**
+   ```bash
+   mkdir testdir                           # Create directory
+   touch testdir/file.txt                  # Create file
+   cp testdir/file.txt testdir/file2.txt   # Copy file
+   mv testdir/file2.txt testdir/file3.txt  # Rename/move file
+   rm testdir/file3.txt                    # Delete file
+   rm -r testdir                           # Delete directory
+   ```
+
+3. **View file content:**
+   ```bash
+   head -10 /etc/passwd    # First 10 lines
+   tail -10 /etc/passwd    # Last 10 lines
+   head -n 5 /etc/passwd   # First 5 lines
+   tail -f /var/log/syslog # Follow log file
+   ```
+
+4. **Search with grep:**
+   ```bash
+   grep root /etc/passwd           # Find "root"
+   grep -i ROOT /etc/passwd        # Case insensitive
+   grep -n root /etc/passwd        # Show line numbers
+   ```
+
+5. **Create and use alias:**
+   ```bash
+   alias ll='ls -l'        # Create alias
+   alias la='ls -la'       # Another useful alias
+   ll                      # Use the alias
+   alias                   # List all aliases
+   ```
+
+## Completion Checklist
+- [ ] Can navigate filesystem using cd, ls, pwd
+- [ ] Understand file operations: create, copy, move, delete
+- [ ] Can view file contents with cat, less, head, tail
+- [ ] Use grep for basic text searching
+- [ ] Created and used command aliases
+- [ ] Comfortable with tab completion and command history
+
+## Key Commands Summary
+```bash
+# Navigation
+pwd                     # Print working directory
+ls -la                  # List all files with details
+cd /path/to/directory   # Change directory
+
+# File operations
+touch filename          # Create empty file
+mkdir dirname           # Create directory
+cp source dest          # Copy file/directory
+mv source dest          # Move/rename
+rm filename             # Remove file
+rm -r dirname           # Remove directory
+
+# View files
+cat filename            # Display entire file
+less filename           # Page through file
+head -n 10 filename     # First 10 lines
+tail -f filename        # Follow file changes
+
+# Search
+grep pattern filename   # Search in file
+find /path -name "*.txt" # Find files by name
+
+# System info
+whoami                  # Current user
+date                    # Current date/time
+uname -a                # System information
+history                 # Command history
+```
+
+## Best Practices
+- Always use `ls -la` to see hidden files and permissions
+- Use `cp -i` and `mv -i` to prompt before overwriting
+- Never use `rm -rf /` or similar dangerous commands
+- Use tab completion to avoid typos
+- Create aliases for frequently used commands
+- Use `man command` to learn more about any command
+
+## Sample Interview Questions
+1. What does the `pwd` command do?
+2. How do you list all files, including hidden ones, in a directory?
+3. What is the difference between `cat`, `less`, and `more`?
+4. How do you create, copy, move, and delete files and directories in Linux?
+5. How do you view the first and last 10 lines of a file?
+6. What is the use of wildcards in file management?
+7. How do you search for a file by name or content?
+8. What is the difference between `cp` and `mv`?
+9. How do you check disk usage of a directory?
+10. How do you use tab completion and command history to improve efficiency?
+
 ## Sample Interview Questions
 1. What does the `pwd` command do?
 2. How do you list all files, including hidden ones, in a directory?
@@ -63,20 +175,17 @@
 10. How do you use tab completion and command history to improve efficiency?
 
 ## Interview Question Answers
-1. `ls` lists files; `ls -l` shows details; `ls -a` shows hidden files; `ls -lh` shows human-readable sizes.
-2. `cd` changes directories; `pwd` prints the current directory; `tree` visualizes directory structure.
-3. `cp` copies files; `mv` moves/renames; `rm` removes files; use `-r` for directories.
-4. `cat` displays file contents; `less`/`more` for paging; `head`/`tail` for first/last lines.
-5. `find` searches for files by name, type, size, etc.; `grep` searches file contents by pattern.
-6. Use `chmod` to change permissions, `chown` to change owner/group, `umask` to set default permissions.
-7. `man` shows manual pages; `--help` gives command options; `info` provides detailed docs.
-8. Use `history` to see previous commands; `!!` repeats last; `!n` repeats command n; `!string` repeats last starting with string.
-9. Use `df -h` for disk usage, `du -sh` for directory size, `free -h` for memory usage.
-10. Use pipes (`|`) to chain commands, redirects (`>`, `>>`, `<`) to control input/output, and wildcards (`*`, `?`) for pattern matching.
+1. **pwd:** Prints the current working directory path
+2. **List Hidden Files:** Use `ls -a` to show all files including those starting with dot (.)
+3. **File Viewers:** `cat` displays entire file; `less`/`more` allow paging through large files; `less` is more feature-rich
+4. **File Operations:** `touch` creates, `cp` copies, `mv` moves/renames, `rm` deletes; use `-r` flag for directories
+5. **File Portions:** `head -10 file` shows first 10 lines; `tail -10 file` shows last 10 lines
+6. **Wildcards:** `*` matches any characters, `?` matches single character, `[]` matches character sets for flexible operations
+7. **File Search:** `find` searches by name/attributes; `grep` searches file contents; `locate` uses database for fast name search
+8. **cp vs mv:** `cp` creates copy leaving original; `mv` moves/renames file removing original
+9. **Disk Usage:** `du -sh directory` shows directory size; `df -h` shows filesystem usage
+10. **Efficiency:** Tab completion auto-completes commands/paths; arrow keys navigate command history; `!!` repeats last command
 
-## Solutions
-1. ls -a ~
-2. mkdir testdir; touch testdir/file.txt; cp testdir/file.txt testdir/file2.txt; mv testdir/file2.txt testdir/file3.txt; rm testdir/file3.txt; rm -r testdir
-3. head -10 /etc/passwd; tail -10 /etc/passwd
-4. grep root /etc/passwd
-5. alias ll='ls -l'; ll
+## Next Steps
+Proceed to [Day 6: Advanced Linux Commands](../Day_06/notes_and_exercises.md) to learn powerful text processing tools like grep, awk, and sed.
+

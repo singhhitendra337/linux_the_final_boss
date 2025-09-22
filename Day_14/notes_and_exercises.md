@@ -1,5 +1,15 @@
 # Day 14: System Monitoring & Log Management
 
+## Learning Objectives
+By the end of Day 14, you will:
+- Monitor system resources effectively
+- Manage and analyze log files
+- Set up log rotation and cleanup
+- Troubleshoot performance issues
+- Understand monitoring best practices
+
+**Estimated Time:** 3-4 hours
+
 ## Notes
 - **Why Monitoring & Logs Matter:**
   - Proactive monitoring prevents outages and enables fast troubleshooting.
@@ -28,27 +38,38 @@
   - Use centralized logging for large environments
   - Secure log files (permissions, access control)
 
-- **Diagram:**
-  - ![Monitoring Diagram](https://upload.wikimedia.org/wikipedia/commons/2/2b/Monitoring_stack.png)
 
-## In-Depth Explanations & Scenarios
-- **Key Metrics to Monitor:**
-  - CPU: Load average, per-core usage
-  - Memory: Used, free, cache, swap
-  - Disk: Usage, I/O, latency
-  - Network: Bandwidth, errors, dropped packets
-- **Real-World Example:**
-  - Use `top`/`htop` for live troubleshooting; `sar` for historical data; `journalctl` for systemd logs.
-- **Centralized Monitoring:**
-  - Tools: Nagios, Zabbix, Prometheus, Grafana, ELK stack
-  - Aggregate logs from multiple servers for alerting and analysis.
-- **Log Rotation Deep Dive:**
-  - `logrotate` config: `/etc/logrotate.conf`, `/etc/logrotate.d/`
-  - Set retention, compression, and post-rotate actions.
-- **Best Practices (Expanded):**
-  - Set up alerting for critical metrics (CPU, disk, memory, network)
-  - Regularly review and prune old logs
-  - Secure logs with proper permissions and encryption if needed
+
+- **Advanced Monitoring Commands:**
+  ```bash
+  # System overview
+  uptime                           # Load average and uptime
+  w                                # Who's logged in and what they're doing
+  
+  # Resource monitoring
+  vmstat 2                         # Virtual memory stats every 2 seconds
+  iostat -x 2                      # Extended I/O stats
+  sar -u 2 5                       # CPU usage, 2 sec intervals, 5 times
+  
+  # Network monitoring
+  netstat -tuln                    # Network connections
+  ss -tuln                         # Modern netstat replacement
+  iftop                            # Network bandwidth usage
+  ```
+
+- **Log Analysis Techniques:**
+  ```bash
+  # Common log locations
+  /var/log/syslog                  # General system messages
+  /var/log/auth.log                # Authentication logs
+  /var/log/kern.log                # Kernel messages
+  /var/log/apache2/                # Web server logs
+  
+  # Log analysis commands
+  grep "ERROR" /var/log/syslog | tail -20
+  awk '/ERROR/ {print $1, $2, $3, $NF}' /var/log/syslog
+  journalctl --since "1 hour ago" --priority=err
+  ```
 
 ## Sample Exercises
 1. Monitor CPU and memory usage in real time.
@@ -58,11 +79,43 @@
 5. Set up log rotation for a custom log file.
 
 ## Solutions
-1. `top` or `htop`
-2. `ps aux --sort=-%mem | head -6`
-3. `watch -n 2 df -h /mydir`
-4. `journalctl | grep error` or `grep error /var/log/syslog`
-5. Edit `/etc/logrotate.conf` or add a config in `/etc/logrotate.d/`
+1. **Real-time monitoring:**
+   ```bash
+   htop                             # Interactive process viewer
+   top                              # Standard process viewer
+   watch -n 1 'free -h && uptime'  # Memory and load
+   ```
+
+2. **Top memory consumers:**
+   ```bash
+   ps aux --sort=-%mem | head -6
+   top -o %MEM                      # Sort by memory in top
+   ```
+
+3. **Watch disk usage:**
+   ```bash
+   watch -n 2 'df -h /mydir'
+   watch -n 1 'du -sh /mydir/*'
+   ```
+
+4. **Log analysis:**
+   ```bash
+   journalctl --priority=err
+   grep -i error /var/log/syslog | tail -20
+   tail -f /var/log/syslog | grep error
+   ```
+
+5. **Log rotation setup:**
+   ```bash
+   # Create /etc/logrotate.d/myapp
+   /var/log/myapp.log {
+       daily
+       rotate 7
+       compress
+       missingok
+       notifempty
+   }
+   ```
 
 ## Sample Interview Questions
 1. What tools do you use to monitor system resources?
@@ -77,13 +130,48 @@
 10. How do you automate log cleanup?
 
 ## Interview Question Answers
-1. Use `top`, `htop`, `vmstat`, `iostat`, `free`, `df`, and `sar` for monitoring.
-2. Use `top`/`htop` to identify processes, then investigate with `ps`, `strace`, or logs.
-3. Use `tail -f` or `journalctl -f` for real-time log monitoring.
-4. Log rotation archives old logs and prevents disk space issues; managed by `logrotate`.
-5. Use monitoring tools with alerting (Nagios, Prometheus) or scripts with `mail`/`sendmail`.
-6. Restrict permissions, use secure storage, and audit access to log files.
-7. `htop` is interactive and user-friendly; `top` is standard and available everywhere.
-8. Use `iostat`, `dstat`, or `sar` to monitor disk I/O.
-9. Use centralized logging solutions (ELK stack, rsyslog, syslog-ng).
-10. Use `logrotate` to automate log cleanup and rotation.
+1. **Monitoring Tools:** top, htop, vmstat, iostat, free, df, sar, dstat for system resources
+2. **High CPU Troubleshooting:** Use top/htop to identify processes, check with ps, strace, logs
+3. **Real-time Logs:** `tail -f /var/log/file` or `journalctl -f` for live monitoring
+4. **Log Rotation:** Prevents disk space issues, archives old logs, managed by logrotate
+5. **Resource Alerts:** Use monitoring tools (Nagios, Prometheus) or custom scripts with thresholds
+6. **Log Security:** Restrict permissions (640), secure storage, audit access, encrypt if needed
+7. **top vs htop:** htop is interactive/colorful; top is standard and universally available
+8. **Disk I/O Monitoring:** iostat, iotop, dstat, sar -d for disk performance metrics
+9. **Centralized Logging:** ELK stack, rsyslog, syslog-ng, Fluentd for log aggregation
+10. **Automated Cleanup:** logrotate with retention policies, compression, and cleanup scripts
+
+## Completion Checklist
+- [ ] Can monitor system resources in real-time
+- [ ] Know how to analyze log files effectively
+- [ ] Understand log rotation configuration
+- [ ] Can troubleshoot performance issues
+- [ ] Familiar with key system metrics
+- [ ] Know log file locations and formats
+
+## Key Commands Summary
+```bash
+# System monitoring
+top/htop                         # Process monitoring
+free -h                          # Memory usage
+df -h                            # Disk usage
+iostat -x 2                      # I/O statistics
+vmstat 2                         # Virtual memory stats
+
+# Log management
+journalctl -f                    # Follow systemd logs
+tail -f /var/log/syslog         # Follow system log
+grep ERROR /var/log/syslog      # Search logs
+logrotate -f /etc/logrotate.conf # Force log rotation
+```
+
+## Best Practices
+- Monitor key metrics: CPU, memory, disk, network
+- Set up alerting for critical thresholds
+- Rotate logs regularly to prevent disk space issues
+- Secure log files with appropriate permissions
+- Use centralized logging for multiple systems
+- Document monitoring procedures and thresholds
+
+## Next Steps
+Proceed to [Day 15: Networking & Troubleshooting](../Day_15/notes_and_exercises.md) to learn network configuration and diagnostics.
