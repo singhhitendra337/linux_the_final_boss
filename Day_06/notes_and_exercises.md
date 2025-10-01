@@ -104,12 +104,13 @@ flowchart LR
 - **xargs:**
   ```bash
   # Basic usage
-  find . -name '*.log' | xargs rm             # Delete found files
   echo 'dir1 dir2 dir3' | xargs mkdir        # Create multiple directories
-  cat filelist.txt | xargs cp -t /backup/    # Copy files to backup
+  cat filelist.txt | xargs cp -t backup/    # Copy files to backup
+  find . -name '*.log' | xargs rm             # Delete found files
   
   # Advanced options
-  find . -name '*.txt' | xargs -I {} cp {} /backup/  # Use placeholder
+  find . -path ./backup -prune -o -name '*.txt' -print | xargs -I {} cp {} backup/  # Use placeholder/Use the prune method to exclude the backup/ folder
+  printf "First log line\nSecond log line\n">> test.log
   find . -name '*.log' | xargs -n 1 wc -l    # Process one file at a time
   find . -name '*.tmp' | xargs -r rm         # Only run if input exists
   ```
@@ -170,6 +171,8 @@ flowchart LR
 
 6. **Extract IP addresses:**
    ```bash
+  echo "172.16.0.2 - - [01/Oct/2025:19:10:00 +0530] \"GET /about HTTP/1.1\" 200 2048" >> access.log
+  echo "203.0.113.25 - - [01/Oct/2025:19:15:00 +0530] \"POST /submit HTTP/1.1\" 404 256" >> access.log # Previously deleted access.log
    grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' logfile.txt
    awk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/ {print $1}' access.log
    ```
