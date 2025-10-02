@@ -180,12 +180,17 @@ flowchart LR
    ```
 
 6. **Extract IP addresses:**
-   ```bash
-  echo "172.16.0.2 - - [01/Oct/2025:19:10:00 +0530] \"GET /about HTTP/1.1\" 200 2048" >> access.log
-  echo "203.0.113.25 - - [01/Oct/2025:19:15:00 +0530] \"POST /submit HTTP/1.1\" 404 256" >> access.log # Previously deleted access.log
-   grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' logfile.txt
-   awk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/ {print $1}' access.log
-   ```
+```bash
+# Create sample log entries
+echo "172.16.0.2 - - [01/Oct/2025:19:10:00 +0530] \"GET /about HTTP/1.1\" 200 2048" >> access.log
+echo "203.0.113.25 - - [01/Oct/2025:19:15:00 +0530] \"POST /submit HTTP/1.1\" 404 256" >> access.log
+
+# Method 1: Using grep with regex pattern
+grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' access.log
+
+# Method 2: Using awk to extract first field (IP address)
+awk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/ {print $1}' access.log
+```
 
 7. **Find and delete empty files:**
    ```bash
