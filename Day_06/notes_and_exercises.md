@@ -138,6 +138,16 @@ flowchart LR
   tr -s ' ' < file.txt                        # Squeeze multiple spaces
   ```
 
+## Sample Exercises
+1. Search for the word "error" in all `.log` files in `/var/log` (case-insensitive).
+2. Print the username and shell from `/etc/passwd` using `awk`.
+3. Replace all occurrences of "foo" with "bar" in a file using `sed`.
+4. Find all files larger than 100MB in your home directory.
+5. Count the number of unique lines in a file.
+6. Extract all IP addresses from a log file.
+7. Find and delete all empty files in a directory tree.
+
+
 ## Solutions
 1. **Search for "error" in log files:**
    ```bash
@@ -239,15 +249,6 @@ ps aux | awk '{print $1}' | sort | uniq -c | sort -nr
 
 ## Next Steps
 Proceed to [Day 7: Users, Groups & Permissions](../Day_07/notes_and_exercises.md) to learn user management and security.
-
-## Sample Exercises
-1. Search for the word "error" in all `.log` files in `/var/log` (case-insensitive).
-2. Print the username and shell from `/etc/passwd` using `awk`.
-3. Replace all occurrences of "foo" with "bar" in a file using `sed`.
-4. Find all files larger than 100MB in your home directory.
-5. Count the number of unique lines in a file.
-6. Extract all IP addresses from a log file.
-7. Find and delete all empty files in a directory tree.
 
 ## Sample Interview Questions
 1. What is the difference between `grep` and `egrep`?
