@@ -93,6 +93,8 @@ When your VM starts, it "wakes up" in steps—watch it to feel the flow.
 The Linux boot is a choreographed sequence turning hardware into a usable OS. It's interview gold—expect "Walk me through it" or "Debug a hang at stage X." As of 2025, systemd dominates (95% distros), but the core flow is timeless.
 
 ### Detailed Step-by-Step
+<img width="1080" height="1080" alt="Blue White Colorful Townhall Meeting Instagram Post (7)" src="https://github.com/user-attachments/assets/2b22042a-500a-4ba9-b306-48788e2d2f75" />
+
 1. **Power-On Self-Test (POST) & Firmware (BIOS/UEFI):** 
    - Hardware powers up; firmware (BIOS legacy or UEFI modern) tests components (CPU, RAM, disks). In VMs, hypervisor emulates this (~1-2s).
    - Locates boot device (e.g., /dev/sda in VM disk). UEFI uses GPT partitions; BIOS MBR.
@@ -123,15 +125,6 @@ The Linux boot is a choreographed sequence turning hardware into a usable OS. It
 **Debug Tips:** `journalctl -b` (systemd logs), `dmesg` (kernel), `systemd-analyze blame` (service timings)—interview gold for "slow boot?" scenarios.
 
 Run `systemd-analyze` after boot to see timings—fun metric!
-
-```mermaid
-flowchart TD
-    A[Start VM] --> B[Hardware Emulation]
-    B --> C[GRUB Loads Kernel]
-    C --> D[Kernel + Services]
-    D --> E[Shell Ready!]
-    style E fill:#27ae60
-```
 
 ## Step-by-Step: Installing Your First VM in VirtualBox
 Let's build an Ubuntu VM—follow along, pause if needed. We'll use Ubuntu 25.04 (Plucky Puffin) and username "linuxthefinalboss".
