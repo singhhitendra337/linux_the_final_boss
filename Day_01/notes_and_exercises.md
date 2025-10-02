@@ -9,7 +9,7 @@ By the end of Day 1, you will:
 - Recognize why Linux is critical for DevOps, SRE, and Cloud Engineers
 - Be familiar with package management concepts and commands
 
-**Estimated Time:** 2-3 hours
+**Estimated Time:** 1-2 hours
 
 ## Why Learn Linux?
 Linux is the **backbone of modern technology**. You interact with it every day, often without realizing it. From supercomputers powering scientific research to servers running the internet and smart devices in your home, Linux is everywhere. It is the operating system of choice for developers, system administrators, and cybersecurity professionals. Understanding Linux is an essential skill for anyone pursuing a career in technology.
