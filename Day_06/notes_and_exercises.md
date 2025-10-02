@@ -138,6 +138,16 @@ flowchart LR
   tr -s ' ' < file.txt                        # Squeeze multiple spaces
   ```
 
+## Sample Exercises
+1. Search for the word "error" in all `.log` files in `/var/log` (case-insensitive).
+2. Print the username and shell from `/etc/passwd` using `awk`.
+3. Replace all occurrences of "foo" with "bar" in a file using `sed`.
+4. Find all files larger than 100MB in your home directory.
+5. Count the number of unique lines in a file.
+6. Extract all IP addresses from a log file.
+7. Find and delete all empty files in a directory tree.
+
+
 ## Solutions
 1. **Search for "error" in log files:**
    ```bash
@@ -170,12 +180,17 @@ flowchart LR
    ```
 
 6. **Extract IP addresses:**
-   ```bash
-  echo "172.16.0.2 - - [01/Oct/2025:19:10:00 +0530] \"GET /about HTTP/1.1\" 200 2048" >> access.log
-  echo "203.0.113.25 - - [01/Oct/2025:19:15:00 +0530] \"POST /submit HTTP/1.1\" 404 256" >> access.log # Previously deleted access.log
-   grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' logfile.txt
-   awk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/ {print $1}' access.log
-   ```
+```bash
+# Create sample log entries
+echo "172.16.0.2 - - [01/Oct/2025:19:10:00 +0530] \"GET /about HTTP/1.1\" 200 2048" >> access.log
+echo "203.0.113.25 - - [01/Oct/2025:19:15:00 +0530] \"POST /submit HTTP/1.1\" 404 256" >> access.log
+
+# Method 1: Using grep with regex pattern
+grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' access.log
+
+# Method 2: Using awk to extract first field (IP address)
+awk '/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/ {print $1}' access.log
+```
 
 7. **Find and delete empty files:**
    ```bash
@@ -239,15 +254,6 @@ ps aux | awk '{print $1}' | sort | uniq -c | sort -nr
 
 ## Next Steps
 Proceed to [Day 7: Users, Groups & Permissions](../Day_07/notes_and_exercises.md) to learn user management and security.
-
-## Sample Exercises
-1. Search for the word "error" in all `.log` files in `/var/log` (case-insensitive).
-2. Print the username and shell from `/etc/passwd` using `awk`.
-3. Replace all occurrences of "foo" with "bar" in a file using `sed`.
-4. Find all files larger than 100MB in your home directory.
-5. Count the number of unique lines in a file.
-6. Extract all IP addresses from a log file.
-7. Find and delete all empty files in a directory tree.
 
 ## Sample Interview Questions
 1. What is the difference between `grep` and `egrep`?
