@@ -1,4 +1,5 @@
 # Day 02: Virtualization & Setting Up Linux (Focus: VirtualBox Hands-On)
+![Free CKA Series (45)](https://github.com/user-attachments/assets/ace8e40c-8c73-4131-b198-577094e680e9)
 
 ## Learning Objectives
 By the end of Day 2, you will:
@@ -17,7 +18,7 @@ Virtualization lets you create a "mini-computer" (VM) inside your real one—per
 - **DevOps:** Test scripts in an isolated VM before deploying to real servers.
 - **SRE:** Use snapshots to "undo" mistakes, like a time machine for troubleshooting.
 - **Cloud Engineers:** Local VMs mimic cloud instances (e.g., AWS EC2) for free practice.
-- **Quick Win:** VirtualBox is free and runs on any OS—your portable Linux lab.
+- **Quick Win:** VirtualBox is free and runs on any OS your portable Linux lab.
 
 **Quick Fact:** Most cloud servers are VMs; mastering VirtualBox is like learning the alphabet before writing code.
 
