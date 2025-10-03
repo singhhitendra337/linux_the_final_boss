@@ -291,4 +291,4 @@ Step-by-step playtime—build confidence one tweak at a time.
 Share your VM desktop pic with #LinuxFinalBoss! Tag @Sagar.Utekar.
 
 ## Next Steps
-Day 3: Files & folders.
+Proceed to [Day 3: Linux Folder Structure & File Types](../Day_03/notes_and_exercises.md) to explore the Linux filesystem.
