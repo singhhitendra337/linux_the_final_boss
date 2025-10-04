@@ -14,11 +14,10 @@ By the end of Day 3, you will:
 
 Linux organizes everything under a single tree starting at root / — no drive letters like Windows. The Filesystem Hierarchy Standard (FHS) standardizes it for consistency across distros (Ubuntu, RHEL, etc.). It's a logical blueprint: system files low, user files high.
 
-When you log in, the shell prompt (e.g., `root@ubuntu:/#` or `ubuntu@ip-172-31-xx-xx:~$`) tells your story:
+When you log in, the shell prompt (e.g., `root@ubuntu:/#` or `ubuntu@ip-172-31-xx-xx:~$`) who/where you are — `echo $USER` (user), `hostname`, `pwd` (path). 
 - **User:** First part (root/ubuntu) — root is admin (full access); regular users (e.g., ubuntu on EC2) have limited perms for security. Multiple users share the machine.
 - **Hostname:** Middle (ubuntu/ip-172-... ) — system ID; irrelevant for single machines but key for fleets.
 - **Path:** Last (`/` or `~`) — current dir. `/` is root (file system top); `~` is home (/home/username or /root for root—exception!).
-- **Why?** Shows who/where you are — `echo $USER` (user), `hostname`, `pwd` (path). In Docker: root@container:/; EC2: ubuntu@host:/home/ubuntu (safer default).
 
 - **Key Directories (Categorized):**
   ![Linux Fily System](https://github.com/user-attachments/assets/6049edd5-7b9b-44e7-b260-01389b792539)
