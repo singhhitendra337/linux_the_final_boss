@@ -66,6 +66,30 @@ Linux treats everything as files even devices (/dev/null swallows output). Ident
   - Named pipes (FIFOs): For inter-process communication
   - Sockets: For network communication
 
+- **Navigating the Filesystem:**
+  - `cd <dir>`: Change directory
+  - `ls`: List directory contents
+  - `pwd`: Print working directory
+  - `tree`: Visualize directory structure (may need to install)
+ 
+- **Commands to Identify File Types:**
+  - `ls -l`: Shows file type in first character:
+    - `-` Regular file
+    - `d` Directory
+    - `l` Symbolic link
+    - `c` Character device
+    - `b` Block device
+    - `p` Named pipe (FIFO)
+    - `s` Socket
+  - `file <filename>`: Describes file content type
+  - `stat <filename>`: Detailed file metadata including inode
+
+## Navigating: Paths & Hidden Files
+- **Absolute Paths:** Full from / (e.g., /home/linuxthefinalboss/docs.txt).
+- **Relative Paths:** From current dir (e.g., ~/docs.txt or ../docs.txt).
+- **Hidden:** Dot-prefixed (.bashrc)—`ls -a` reveals; `find . -name ".*"` hunts.
+
+**Commands:** `cd /etc`; `pwd`; `ls -la /home`; `tree -L 2 ~` (install tree if needed).
 ## Symbolic vs. Hard Links: The Twin Files
 Links let files "point" elsewhere—key for backups and configs.
 
@@ -98,32 +122,6 @@ graph LR
 ```
 
 **Test It:** `echo "Hi" > file; ln -s file sym; ln file hard; ls -li` (sym has new inode).
-
-- **Navigating the Filesystem:**
-  - `cd <dir>`: Change directory
-  - `ls`: List directory contents
-  - `pwd`: Print working directory
-  - `tree`: Visualize directory structure (may need to install)
- 
-- **Commands to Identify File Types:**
-  - `ls -l`: Shows file type in first character:
-    - `-` Regular file
-    - `d` Directory
-    - `l` Symbolic link
-    - `c` Character device
-    - `b` Block device
-    - `p` Named pipe (FIFO)
-    - `s` Socket
-  - `file <filename>`: Describes file content type
-  - `stat <filename>`: Detailed file metadata including inode
-
-
-## Navigating: Paths & Hidden Files
-- **Absolute Paths:** Full from / (e.g., /home/linuxthefinalboss/docs.txt).
-- **Relative Paths:** From current dir (e.g., ~/docs.txt or ../docs.txt).
-- **Hidden:** Dot-prefixed (.bashrc)—`ls -a` reveals; `find . -name ".*"` hunts.
-
-**Commands:** `cd /etc`; `pwd`; `ls -la /home`; `tree -L 2 ~` (install tree if needed).
 
 -----------------------
 ## Hands-on Exercises & Lab
