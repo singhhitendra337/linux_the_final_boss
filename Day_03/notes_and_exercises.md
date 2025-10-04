@@ -8,7 +8,7 @@ By the end of Day 3, you will:
 - Create and manage symbolic and hard links
 - Understand the purpose of key directories
 
-**Estimated Time:** 1 hours
+**Estimated Time:** 30 mins
 
 ## What is the Linux Filesystem Hierarchy?
 
