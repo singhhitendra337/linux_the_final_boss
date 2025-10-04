@@ -14,35 +14,44 @@ By the end of Day 3, you will:
 
 Linux organizes everything under a single tree starting at root / — no drive letters like Windows. The Filesystem Hierarchy Standard (FHS) standardizes it for consistency across distros (Ubuntu, RHEL, etc.). It's a logical blueprint: system files low, user files high.
 
-
+### Understanding Your Prompt & User Context
+When you log in, the shell prompt (e.g., `root@ubuntu:/#` or `ubuntu@ip-172-31-xx-xx:~$`) tells your story:
+- **User:** First part (root/ubuntu) — root is admin (full access); regular users (e.g., ubuntu on EC2) have limited perms for security. Multiple users share the machine.
+- **Hostname:** Middle (ubuntu/ip-172-... ) — system ID; irrelevant for single machines but key for fleets.
+- **Path:** Last (`/` or `~`) — current dir. `/` is root (file system top); `~` is home (/home/username or /root for root—exception!).
+- **Why?** Shows who/where you are — `echo $USER` (user), `hostname`, `pwd` (path). In Docker: root@container:/; EC2: ubuntu@host:/home/ubuntu (safer default).
 
 - **Key Directories (Categorized):**
   ![Linux Fily System](https://github.com/user-attachments/assets/6049edd5-7b9b-44e7-b260-01389b792539)
 
-    - `/bin`: Essential user binaries (ls, cp, mv)
-    - `/sbin`: System binaries (administrative commands)
-    - `/lib`, `/lib64`: Essential shared libraries
-    - `/boot`: Boot loader files (kernel, initrd)
-    - `/dev`: Device files
-    - `/etc`: System configuration files
-    - `/proc`: Virtual filesystem for process and kernel info
-    - `/sys`: Virtual filesystem for system info
-    - `/run`: Runtime variable data
-  - **User Data & Home:**
-    - `/home`: User home directories
-    - `/root`: Home directory for root user
-  - **Variable & Temporary Data:**
-    - `/var`: Variable data (logs, mail, spool)
-    - `/tmp`: Temporary files (writable by all users)
-  - **Additional Software & User Programs:**
-    - `/usr`: User programs, libraries, documentation
-    - `/usr/bin`, `/usr/sbin`: Non-essential user/system binaries
-    - `/usr/local`: Locally installed software
-    - `/opt`: Optional/additional software
-  - **Mount Points:**
-    - `/mnt`: Temporary mount point for filesystems
-    - `/media`: Removable media (USB, CD-ROM)
-    - `/srv`: Data for services (web, ftp)
+- **/bin:** Essential user binaries (ls, cp, mv), non-admin, accessible to all.
+- **/sbin:** System binaries (administrative commands), admin-only for managing users/groups.
+- **/lib, /lib64:** Essential libraries for kernel/system calls.
+- **/boot:** Boot loader files (kernel, initrd), used on restarts.
+- **/dev:** Device files.
+- **/etc:** System configuration files.
+- **/proc:** Virtual filesystem for process and kernel info.
+- **/sys:** Virtual filesystem for system info.
+- **/run:** Runtime variable data.
+
+#### User Data & Home
+- **/home:** User home directories (/home/linuxthefinalboss)—personal; /root for root (exception).
+- **/root:** Home directory for root user.
+
+#### Variable & Temporary Data
+- **/var:** Variable data (logs, mail, spool)—logs (/var/log for Apache/HTTPD), libs (/var/lib), cache (/var/cache).
+- **/tmp:** Temporary files (writable by all users)—auto-cleaned (like recently deleted photos).
+
+#### Additional Software & User Programs
+- **/usr:** User programs, libraries, documentation (/usr/bin apps like curl, /usr/lib libs, /usr/local local installs)—/bin shortcut to /usr/bin.
+- **/usr/bin, /usr/sbin:** Non-essential user/system binaries.
+- **/usr/local:** Locally installed software.
+- **/opt:** Optional/additional software (e.g., Java versions) — common for org tools.
+
+#### Mount Points
+- **/mnt:** Temporary mount point for filesystems (manual, e.g., NFS).
+- **/media:** Removable media (USB, CD-ROM)—auto.
+- **/srv:** Data for services (web, ftp)—for sharing.
 
 
 ## File Types in Linux:
