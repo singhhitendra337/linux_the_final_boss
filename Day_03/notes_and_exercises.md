@@ -161,19 +161,6 @@ graph LR
 5. **Paths:** Abs: full (/home/file); rel: current (file or ../file)—find hunts hidden. Scripts prefer abs for reliability.
 6. **Challenge:** du skips /proc (virtual); broken: ls -l (→ target), find -L (locate), ln -sf (fix/recreate).
 
-## Completion Checklist
-- [ ] Navigated root & key dirs
-- [ ] Practiced paths & hidden files
-- [ ] Identified file types with ls/file
-- [ ] Created/managed links
-- [ ] Visualized hierarchy with tree
-
-## Troubleshooting
-- **Permission Denied:** `sudo` for system dirs; chown for ownership.
-- **Broken Symlink:** `ls -l` spots (→ target); recreate or fix path.
-- **No tree:** `sudo apt install tree`.
-- **Inode Full:** df -i checks; clean /tmp.
-
 
 ## Completion Checklist
 - [ ] Can navigate filesystem using cd, ls, pwd
