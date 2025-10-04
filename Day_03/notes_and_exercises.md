@@ -17,7 +17,8 @@ Linux organizes everything under a single tree starting at root / — no drive l
 
 
 - **Key Directories (Categorized):**
-  - **Essential System Directories:**
+  ![Linux Fily System](https://github.com/user-attachments/assets/6049edd5-7b9b-44e7-b260-01389b792539)
+
     - `/bin`: Essential user binaries (ls, cp, mv)
     - `/sbin`: System binaries (administrative commands)
     - `/lib`, `/lib64`: Essential shared libraries
@@ -43,40 +44,10 @@ Linux organizes everything under a single tree starting at root / — no drive l
     - `/media`: Removable media (USB, CD-ROM)
     - `/srv`: Data for services (web, ftp)
 
-```mermaid
-graph TD
-    A["/"] --> B["/bin"]
-    A --> C["/sbin"]
-    A --> D["/lib"]
-    A --> E["/etc"]
-    A --> F["/home"]
-    A --> G["/var"]
-    A --> H["/usr"]
-    A --> I["/tmp"]
-    A --> J["/boot"]
-    A --> K["/dev"]
-    A --> L["/proc"]
-    A --> M["/sys"]
-    
-    F --> F1["/home/user1"]
-    F --> F2["/home/user2"]
-    
-    G --> G1["/var/log"]
-    G --> G2["/var/lib"]
-    G --> G3["/var/www"]
-    
-    H --> H1["/usr/bin"]
-    H --> H2["/usr/lib"]
-    H --> H3["/usr/local"]
-    
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
-    style E fill:#bbf,stroke:#333,stroke-width:2px
-    style F fill:#bfb,stroke:#333,stroke-width:2px
-```
 
-- **File Types in Linux:**
-Linux treats everything as files—even devices (/dev/null swallows output). Identify with ls -l (first char) or the file command.
+## File Types in Linux:
+Linux treats everything as files even devices (/dev/null swallows output). Identify with ls -l (first char) or the file command.
+
 ### Common Types -
   - Regular files: Text, binary, scripts, etc.
   - Directories: Folders containing files
