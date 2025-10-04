@@ -32,24 +32,24 @@ By the end of Day 13, you will:
 
 ```mermaid
 flowchart TD
-    A[Job Scheduling] --> B[cron<br/>Recurring Tasks]
-    A --> C[at<br/>One-time Tasks]
-    A --> D[anacron<br/>Periodic Tasks]
+    A[Job Scheduling] --> B[cron<br>Recurring Tasks]
+    A --> C[at<br>One-time Tasks]
+    A --> D[anacron<br>Periodic Tasks]
     
     B --> B1[crontab -e]
-    B --> B2[Cron Syntax<br/>min hour day month weekday]
-    B --> B3[System cron<br/>/etc/crontab]
+    B --> B2[Cron Syntax<br>min hour day month weekday]
+    B --> B3[System cron<br>/etc/crontab]
     
     C --> C1[at 10:00]
     C --> C2[atq - list jobs]
     C --> C3[atrm - remove job]
     
-    D --> D1[/etc/anacrontab]
+    D --> D1["/etc/anacrontab"]
     D --> D2[Handles missed jobs]
     
-    B2 --> E[Daily Backup<br/>0 2 * * *]
-    B2 --> F[Every 5 min<br/>*/5 * * * *]
-    B2 --> G[Weekly Task<br/>0 0 * * 0]
+    B2 --> E[Daily Backup<br>0 2 * * *]
+    B2 --> F[Every 5 min<br>*/5 * * * *]
+    B2 --> G[Weekly Task<br>0 0 * * 0]
     
     style A fill:#f96
     style B fill:#9f6
@@ -111,8 +111,21 @@ flowchart TD
 ## Solutions
 1. **Daily cron job:**
    ```bash
+   # Create script
+   vi /path/to/script.sh 
+   # Add these content in the script.sh
+   '#!/bin/bash
+    echo "Cron executed successfully" > /tmp/hello.txt'
+   chmod +x /path/to/script.sh
    crontab -e
    # Add: 0 0 * * * /path/to/script.sh
+   # Check if cronjob is installed
+   crontab -l
+   # Check if the txts are generating 
+   cat /tmp/hello.txt
+   # Check cron logs if it does not run
+   grep CRON /var/log/syslog # Ubuntu/Debian
+   grep CRON /var/log/cron # CentOS/RHEL
    ```
 
 2. **One-time at job:**
@@ -131,13 +144,27 @@ flowchart TD
 
 4. **Anacron job:**
    ```bash
+   anacron -V # Check anacron version and install if not installed 
    sudo vim /etc/anacrontab
    # Add: 1 5 myjob /path/to/script.sh
+   grep anacron /var/log/syslog # Ubuntu/Debian
+   grep anacron /var/log/cron # CentOS/RHEL
    ```
 
 5. **Cron with logging:**
    ```bash
-   0 0 * * * /path/to/script.sh > /var/log/script.log 2>&1
+   vi myscript.sh # Create a script
+   chmod +x myscript.sh
+   Add the below
+   '#!/bin/bash
+   echo "Script started at $(date)"
+   # Your commands here
+   echo "Script ended at $(date)"'
+   crontab -e
+   0 0 * * * /path/to/myscript.sh > /var/log/script.log 2>&1
+   # Check cron logs if it does not run
+   grep CRON /var/log/syslog # Ubuntu/Debian
+   grep CRON /var/log/cron # CentOS/RHEL
    ```
 
 ## Sample Interview Questions

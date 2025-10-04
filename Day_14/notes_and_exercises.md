@@ -33,7 +33,7 @@ flowchart TD
     C --> C5[uptime<br/>Load Average]
     
     D --> D1[journalctl<br/>systemd Logs]
-    D --> D2[/var/log/*<br/>System Logs]
+    D --> D2["/var/log/*"<br/>System Logs]
     D --> D3[logrotate<br/>Log Rotation]
     D --> D4[grep/awk<br/>Log Analysis]
     
