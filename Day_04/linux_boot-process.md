@@ -57,17 +57,6 @@ Responsibilities:
 Key Files:
 - `/etc/default/grub` → human-editable defaults.
 - Generated config: `/boot/grub2/grub.cfg` (BIOS / many RPM distros) or `/boot/efi/EFI/<distro>/grub.cfg` (some UEFI layouts).
-Common Parameters (view with `cat /proc/cmdline`):
-| Param | Purpose |
-|-------|---------|
-| `root=UUID=` | Select real root filesystem |
-| `ro` / `rw` | Initial root mount mode |
-| `quiet` / `splash` | Reduce console noise / show splash image |
-| `systemd.unit=<target>` | Boot directly into a specific target |
-| `rd.luks.uuid=` | Identify encrypted device for early unlock |
-| `rd.lvm.lv=` | Specify LVM LV path |
-| `panic=SECONDS` | Auto-reboot after kernel panic |
-| `console=ttyS0,115200` | Serial console (servers/headless) |
 
 ### 5. Kernel Load & Decompression
 Sequence:
