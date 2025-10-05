@@ -11,7 +11,7 @@ By the end of Day 4, you will:
 **Estimated Time:** 1 hour
 
 ## Quick Recap: The Linux Boot Process
-When your VM starts, it "wakes up" in steps—watch it to feel the flow.
+When your VM starts, it "wakes up" in steps watch it to feel the flow.
 
 The Linux boot is a choreographed sequence turning hardware into a usable OS.
 
