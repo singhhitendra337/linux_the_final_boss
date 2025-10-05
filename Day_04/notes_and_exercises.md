@@ -36,6 +36,8 @@ The Linux boot is a choreographed sequence turning hardware into a usable OS.
    - systemd reads /etc/fstab for mounts; parses units in /lib/systemd/system.
    - Reaches default target (multi-user.target for servers; graphical.target for desktops).
    - Starts services parallel (e.g., NetworkManager, sshd). Time: 10-60s.
+   - What is a runlevel? A runlevel is a legacy SysVinit numeric system state (0–6) defining which set of startup/shutdown scripts (services) should be active. systemd replaces these with named, dependency-driven targets (e.g., multi-user.target, graphical.target) that are more flexible.
+     
 Runlevel Mapping (for legacy reference):
 | Legacy Runlevel | systemd Target | Meaning |
 |-----------------|----------------|---------|
