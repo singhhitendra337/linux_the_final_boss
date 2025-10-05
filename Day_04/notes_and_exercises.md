@@ -13,7 +13,7 @@ By the end of Day 4, you will:
 ## Quick Recap: The Linux Boot Process
 When your VM starts, it "wakes up" in steps—watch it to feel the flow.
 
-The Linux boot is a choreographed sequence turning hardware into a usable OS. It's interview gold—expect "Walk me through it" or "Debug a hang at stage X." As of 2025, systemd dominates (95% distros), but the core flow is timeless.
+The Linux boot is a choreographed sequence turning hardware into a usable OS.
 
 ### Detailed Step-by-Step
 <img width="1080" height="1080" alt="Blue White Colorful Townhall Meeting Instagram Post (7)" src="https://github.com/user-attachments/assets/2b22042a-500a-4ba9-b306-48788e2d2f75" />
