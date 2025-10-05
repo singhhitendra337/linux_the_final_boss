@@ -30,12 +30,22 @@ The Linux boot is a choreographed sequence turning hardware into a usable OS.
 3. **Kernel Initialization:**
    - Kernel (bzImage) decompresses into RAM. Mounts initramfs (compressed FS with early drivers).
    - Probes hardware (via modules like virtio for VMs), sets up memory (paging), mounts real root FS (/).
-   - Starts PID 1 (init). Logs to dmesg. Time: 5-20s.
+   - Starts PID 1 (systemd or init). ****Logs to dmesg. Time: 5-20s.
 
 4. **Init System (systemd):**
    - systemd reads /etc/fstab for mounts; parses units in /lib/systemd/system.
    - Reaches default target (multi-user.target for servers; graphical.target for desktops).
    - Starts services parallel (e.g., NetworkManager, sshd). Time: 10-60s.
+Runlevel Mapping (for legacy reference):
+| Legacy Runlevel | systemd Target | Meaning |
+|-----------------|----------------|---------|
+| 0 | `poweroff.target` | Halt system |
+| 1 | `rescue.target` | Single-user (maintenance) |
+| 3 | `multi-user.target` | Non-graphical multi-user |
+| 5 | `graphical.target` | Multi-user + GUI |
+| 6 | `reboot.target` | Reboot |
+| S/Emergency | `emergency.target` | Minimal root shell |
+Default target symlink: `/etc/systemd/system/default.target`.
 
 5. **User Space & Login:**
    - getty spawns on tty/SSH; PAM authenticates user.
